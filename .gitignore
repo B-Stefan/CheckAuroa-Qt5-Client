@@ -27,10 +27,12 @@
 # Executables
 *.exe
 *.out
+/build-CheckAurora-Qt_5_5_0_5_5_0-Debug
 *.app
 ### Qt template
 # C++ objects and libs
 
+.DS_Store
 *.slo
 *.lo
 *.o
