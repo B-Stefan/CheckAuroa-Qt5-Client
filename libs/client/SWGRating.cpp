@@ -1,7 +1,5 @@
-
+//#include "SWGHelpers.h"
 #include "SWGRating.h"
-
-#include "SWGHelpers.h"
 
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -174,10 +172,12 @@ double
 SWGRating::getValue() {
     return value;
 }
+
+/*
 void
 SWGRating::setValue(double value) {
     this->value = value;
-}
+}*/
 
 
 

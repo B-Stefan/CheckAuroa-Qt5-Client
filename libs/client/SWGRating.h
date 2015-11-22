@@ -15,7 +15,7 @@
 #include "SWGGeomagnaticLocation.h"
 #include "SWGLocation.h"
 #include "SWGKpInformation.h"
-
+#include "SWGHelpers.h"
 #include "SWGObject.h"
 
 
@@ -45,7 +45,7 @@ public:
     SWGWeatherInformation* getWeather();
     void setWeather(SWGWeatherInformation* weather);
     double getValue();
-    void setValue(double value);
+    //void setValue(double value);
     
 
 private:

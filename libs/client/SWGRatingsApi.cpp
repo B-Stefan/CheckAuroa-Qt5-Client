@@ -2,6 +2,7 @@
 #include "SWGHelpers.h"
 #include "SWGModelFactory.h"
 
+#include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
 
@@ -20,10 +21,6 @@ SWGRatingsApi::getRating(double lng, double lat, QString* uTCDateTime) {
     QString fullPath;
     fullPath.append(this->host).append(this->basePath).append("/ratings");
 
-    
-
-    
-    
     if(fullPath.indexOf("?") > 0) 
       fullPath.append("&");
     else 
@@ -31,11 +28,8 @@ SWGRatingsApi::getRating(double lng, double lat, QString* uTCDateTime) {
     fullPath.append(QUrl::toPercentEncoding("lng"))
         .append("=")
         .append(QUrl::toPercentEncoding(stringValue(lng)));
-    
 
-    
-    
-    
+
     if(fullPath.indexOf("?") > 0) 
       fullPath.append("&");
     else 

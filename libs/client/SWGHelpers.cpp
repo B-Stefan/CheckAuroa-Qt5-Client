@@ -176,6 +176,11 @@ stringValue(QString* value) {
 }
 
 QString
+stringValue(double value) {
+    return QString::number(value);
+}
+
+QString
 stringValue(qint32 value) {
     return QString::number(value);
 }

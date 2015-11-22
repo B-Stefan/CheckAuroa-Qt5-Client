@@ -12,6 +12,7 @@ namespace Swagger {
     QString stringValue(qint32 value);
     QString stringValue(qint64 value);
     QString stringValue(bool value);
+    QString stringValue(double value);
 }
 
 #endif // SWGHELPERS_H
