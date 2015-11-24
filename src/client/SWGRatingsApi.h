@@ -32,7 +32,6 @@ private:
 signals:
     void getRatingSignal(QList<SWGRating*>* summary);
     void getCurrentRatingSignal(SWGRating* summary);
-    
 };
 }
 #endif

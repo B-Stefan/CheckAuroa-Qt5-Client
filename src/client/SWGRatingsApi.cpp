@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QJsonArray>
 #include <QJsonDocument>
+#include <qqmlapplicationengine.h>
+
+#include <src/message.h>
 
 namespace Swagger {
 SWGRatingsApi::SWGRatingsApi() {}
@@ -176,16 +179,13 @@ SWGRatingsApi::getCurrentRatingCallback(HttpRequestWorker * worker) {
         msg = "Error: " + worker->error_str;
     }
 
-    
-
-    
-    
-    
     QString json(worker->response);
     SWGRating* output = static_cast<SWGRating*>(create(json, QString("SWGRating")));
     
-    
-    
+    double tmp = output->getKp()->getKpValue();
+
+    qDebug() << tmp;
+    qDebug() << "trigger";
 
     worker->deleteLater();
 
