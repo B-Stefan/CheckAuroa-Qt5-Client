@@ -42,32 +42,25 @@ int main(int argc, char **argv)
 {
         Application app(argc, argv);
 
-
         QQmlApplicationEngine appEngine;
         Message * msg = new Message();
+
         SWGRatingsApi * ratingsApi = new SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
-        ratingsApi->getCurrentRating(60.0,20.9, new QString("2015-10-10"));
-
-       // QObject::connect(&ratingsApi, SIGNAL(getCurrentRatingSignal(SWGRating)),
-       //                  &msg, SLOT(getCurRating(SWGRating)));
-
+        ratingsApi->getCurrentRating(60.0,20.9, new QString("now"));
         QObject::connect(ratingsApi, &ratingsApi->getCurrentRatingSignal, msg, &msg->getCurRating);
-        qDebug() << msg->getKpIndex();
 
 
-        appEngine.rootContext()->setContextProperty("msg", msg->getKpIndex());
+        appEngine.rootContext()->setContextProperty("msg", &*msg);
         QQmlComponent component(&appEngine, QUrl("qrc:/qml/main.qml"));
 
 
 
-        qDebug() << component.errors();
+       // qDebug() << component.errors();
 
         if (component.isReady()){
             component.create();
-            qDebug() << "created";
+            qDebug() << msg->getAuthor() <<  " created";
         }
-
-        qDebug() << component.objectName();
 
         return app.exec();
 }

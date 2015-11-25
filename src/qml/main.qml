@@ -87,9 +87,9 @@ ApplicationWindow {
                 Text {
                     anchors.centerIn: parent
                     font.pointSize: 25
-                    text: msg.author
+                    text: msg.kpIndexString
                     Component.onCompleted: {
-                        msg.author = "Jonah"  // invokes Message::setAuthor()
+                        msg.kpIndexString = "Jonah"  // invokes Message::setAuthor()
                     }
 
                 }

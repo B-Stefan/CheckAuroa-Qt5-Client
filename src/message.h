@@ -10,20 +10,21 @@ namespace Swagger{
 class Message : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString author READ author WRITE setAuthor NOTIFY authorChanged)
+    Q_PROPERTY(QString kpIndexString READ kpIndexString WRITE setAuthor NOTIFY authorChanged)
 public:
     Message();
 public:
     void setAuthor(const QString &a);
     void setKpIndex();
     double getKpIndex();
-    QString author() const;
+    QString kpIndexString() const;
+    QString getAuthor();
 signals:
     void authorChanged();
 private:
     QString m_author;
-    double kpIndex = 0;
     SWGRating *cKp;
+    double kpIndex = 0;
 public slots:
     void getCurRating(SWGRating* summary);
 };

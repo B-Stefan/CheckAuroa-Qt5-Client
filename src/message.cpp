@@ -6,30 +6,24 @@ namespace Swagger{
     {
 
     }
-    /*
+        // ALT
     void Message::setAuthor(const QString &a) {
         if (a != m_author) {
+       //     QString tmp = QString::number(kpIndex);
+            qDebug() << a;
             m_author = a;
-            emit authorChanged();
-        }
-    }*/
-
-    void Message::setAuthor(const QString &a) {
-        if (a != m_author) {
-            m_author = a;
-
-           // SWGRatingsApi * ratingsApi = new SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
-           // ratingsApi->getCurrentRating(60.0,20.9, new QString("2015-10-10"));
-          //  SWGRating tmp;
-          //  tmp = ratingsApi->getCurrentRatingSignal();
             emit authorChanged();
         }
     }
 
     void Message::getCurRating(SWGRating* summary){
         this->cKp = summary;
-        setKpIndex();
-        qDebug() << "jackpot";
+        if(cKp){
+            kpIndex = cKp->getValue();
+            qDebug() << cKp->getWeather()->getCloudCover() << " cloudcover";
+        } else {
+            kpIndex = 0;
+        }
     }
 
     void Message::setKpIndex(){
@@ -41,18 +35,16 @@ namespace Swagger{
     }
 
     double Message::getKpIndex(){
-        qDebug() << kpIndex;
+        qDebug() << kpIndex << "testnumber";
         return kpIndex;
     }
 
-    /*
-    QString Message::author() const {
+    QString Message::getAuthor(){
         return m_author;
-    }*/
+    }
 
-
-    QString Message::author() const {
-        return m_author;
+    QString Message::kpIndexString() const {
+        return QString::number(kpIndex) + "%";
     }
 }
 
