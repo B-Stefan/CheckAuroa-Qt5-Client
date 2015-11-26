@@ -47,7 +47,7 @@ int main(int argc, char **argv)
 
         SWGRatingsApi * ratingsApi = new SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
         ratingsApi->getCurrentRating(60.0,20.9, new QString("now"));
-        QObject::connect(ratingsApi, &ratingsApi->getCurrentRatingSignal, msg, &msg->getCurRating);
+        QObject::connect(ratingsApi, SIGNAL(Swagger::SWGRatingsApi::getCurrentRatingSignal(SWGRating*)), msg, SLOT(Swagger::Message::getCurRating(SWGRating*)));
 
 
         appEngine.rootContext()->setContextProperty("msg", &*msg);
