@@ -38,7 +38,7 @@ ApplicationWindow {
     minimumHeight:  Units.dp(200)
     width: bigsize ? Units.dp(400) : Units.dp(247)
     minimumWidth: bigsize ? Units.dp(280): Units.dp(247)
-	  maximumWidth: bigsize ? 99999999 : Units.dp(247)
+    maximumWidth: bigsize ? 99999999 : Units.dp(247)
     onWidthChanged: drawer.close()
     theme {
         accentColor: accentchosen
@@ -72,7 +72,7 @@ ApplicationWindow {
                     anchors.centerIn: parent
                     darkBackground: true
                     text: "Go to tab 3"
-                    onClicked: page.selectedTab = 2
+                    onClicked: main.selectedTab = 2
                 }
             }
         }
