@@ -55,10 +55,6 @@ int main(int argc, char **argv)
         appEngine.rootContext()->setContextProperty("msg", &*msg);
         QQmlComponent component(&appEngine, QUrl("qrc:/qml/main.qml"));
 
-
-
-       // qDebug() << component.errors();
-
         if (component.isReady()){
             component.create();
             qDebug() << msg->getAuthor() <<  " created";

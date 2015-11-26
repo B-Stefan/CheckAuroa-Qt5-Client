@@ -90,14 +90,34 @@ ApplicationWindow {
         Tab {
             title: "Current KP Index"
 
+            onVisibleChanged: {
+                if (!this.activeFocus){
 
+                    if (positionSource.supportedPositioningMethods ===
+                            PositionSource.NoPositioningMethods) {
+                        positionSource.nmeaSource = "nmealog.txt";
+                        sourceText.text = "(filesource): " + printableMethod(positionSource.supportedPositioningMethods);
+                    }
+                    positionSource.update();
+                    msg.latitude = positionSource.position.coordinate.latitude
+                    msg.longitude = positionSource.position.coordinate.longitude
+                }
+            }
 
             Rectangle { color: Palette.colors.white["200"]
+
+                Text {
+                    anchors.centerIn: bottom
+                    //anchors.centerIn: parent
+                    font.pointSize: 15
+                    text: "latitude: " + msg.latitude + "longitude " + msg.longitude
+                }
 
                 Text {
                     anchors.centerIn: parent
                     font.pointSize: 25
                     text: msg.kpIndexString
+
                     Component.onCompleted: {
                         msg.latitude = positionSource.position.coordinate.latitude
                         msg.longitude = positionSource.position.coordinate.longitude
