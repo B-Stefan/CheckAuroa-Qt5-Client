@@ -25,6 +25,7 @@ import QtQuick.Layouts 1.0
 import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
 import QtQuick.Controls 1.4 as Controls
+import QtPositioning 5.3
 
 ApplicationWindow {
     id: calculator
@@ -56,6 +57,15 @@ ApplicationWindow {
         property alias history_pos: calculator.history_pos
     }
     initialPage: main
+
+    PositionSource {
+           id: positionSource
+           onPositionChanged: { console.log("Position Changed"); }
+
+           onUpdateTimeout: {
+               activityText.fadeOut = true
+           }
+       }
 
     TabbedPage {
         id: main
@@ -89,7 +99,10 @@ ApplicationWindow {
                     font.pointSize: 25
                     text: msg.kpIndexString
                     Component.onCompleted: {
+                        msg.latitude = positionSource.position.coordinate.latitude
+                        msg.longitude = positionSource.position.coordinate.longitude
                         msg.kpIndexString = "Jonah"  // invokes Message::setAuthor()
+                        positionSource.position.coordinate;
                     }
 
                 }
@@ -100,10 +113,30 @@ ApplicationWindow {
         Tab {
             title: "Settings"
 
-            Rectangle { color: Palette.colors.white["200"] }
+            Rectangle { color: Palette.colors.white["200"]
+
+                Button {
+                        id: locateButton
+                        text: "Locate & update"
+                        anchors {left: parent.left; leftMargin: 5}
+                        y: 3; height: 32; width: parent.width - 10
+                        onClicked: {
+                            if (positionSource.supportedPositioningMethods ===
+                                    PositionSource.NoPositioningMethods) {
+                                positionSource.nmeaSource = "nmealog.txt";
+                                sourceText.text = "(filesource): " + printableMethod(positionSource.supportedPositioningMethods);
+                            }
+                            positionSource.update();
+                            var coord = positionSource.position.coordinate;
+                            console.log("Coordinate:", coord.longitude, coord.latitude);
+                            msg.coords = 50
+                        }
+
+                }
+            }
+
+
+
         }
-
-
-
     }
 }

@@ -45,6 +45,8 @@ int main(int argc, char **argv)
         QQmlApplicationEngine appEngine;
         Message * msg = new Message();
 
+        qDebug() << msg->latitude();
+
         SWGRatingsApi * ratingsApi = new SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
         ratingsApi->getCurrentRating(60.0,20.9, new QString("now"));
         QObject::connect(ratingsApi, SIGNAL(Swagger::SWGRatingsApi::getCurrentRatingSignal(SWGRating* summary)), msg, SLOT(Swagger::Message::getCurRating(SWGRating* summary)));
@@ -61,7 +63,7 @@ int main(int argc, char **argv)
             component.create();
             qDebug() << msg->getAuthor() <<  " created";
         }
-
+        qDebug() << msg->kpIndexString();
         return app.exec();
 }
 
