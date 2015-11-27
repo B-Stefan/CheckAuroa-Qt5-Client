@@ -42,6 +42,9 @@
 *.dll
 *.dylib
 
+/build-ios-re
+/build-mac
+/build-ios-debug
 # Qt-es
 
 /.qmake.cache

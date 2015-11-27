@@ -1,8 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/main.qml</file>
-        <file>js/script.js</file>
-        <file>qml/PageStackDemo.qml</file>
+        <file>qml/CurrentRatingBigCard.qml</file>
         <file>qml/SubPage.qml</file>
         <file>qml/CalculatorButton.qml</file>
     </qresource>

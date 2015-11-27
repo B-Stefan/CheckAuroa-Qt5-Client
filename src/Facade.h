@@ -7,12 +7,12 @@
 
 namespace Swagger{
 
-class Message : public QObject
+class Facade : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString kpIndexString READ kpIndexString WRITE setAuthor NOTIFY authorChanged)
 public:
-    Message();
+    Facade();
 public:
     void setAuthor(const QString &a);
     void setKpIndex();

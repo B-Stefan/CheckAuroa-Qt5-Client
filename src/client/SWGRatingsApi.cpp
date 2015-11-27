@@ -7,7 +7,6 @@
 #include <QJsonDocument>
 #include <qqmlapplicationengine.h>
 
-#include <src/message.h>
 
 namespace Swagger {
 SWGRatingsApi::SWGRatingsApi() {}
@@ -185,7 +184,6 @@ SWGRatingsApi::getCurrentRatingCallback(HttpRequestWorker * worker) {
     double tmp = output->getKp()->getKpValue();
 
     qDebug() << tmp;
-    qDebug() << "trigger";
 
     worker->deleteLater();
 

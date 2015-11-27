@@ -30,27 +30,25 @@ typedef QGuiApplication Application;
 #include <QLabel>
 #include <QCoreApplication>
 #include <QObject>
-#include "src/client/SWGRatingsApi.h"
-#include "src/client/SWGRating.h"
-#include "src/message.h"
+#include "CurrentRatingManager.h"
 #include <QQmlComponent>
 #include <QQmlEngine>
 
+#include "RatingQmlData.h"
 using namespace Swagger;
 
 int main(int argc, char **argv)
 {
         Application app(argc, argv);
 
+        qmlRegisterType<RatingQmlData>("CheckAurora", 1, 0, "RatingQmlData");
+        qmlRegisterType<CurrentRatingManager>("CheckAurora", 1, 0, "CurrentRatingManager");
+
+        qRegisterMetaType<RatingQmlData>();
+
         QQmlApplicationEngine appEngine;
-        Message * msg = new Message();
 
-        SWGRatingsApi * ratingsApi = new SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
-        ratingsApi->getCurrentRating(60.0,20.9, new QString("now"));
-        QObject::connect(ratingsApi, SIGNAL(Swagger::SWGRatingsApi::getCurrentRatingSignal(SWGRating* summary)), msg, SLOT(Swagger::Message::getCurRating(SWGRating* summary)));
-
-
-        appEngine.rootContext()->setContextProperty("msg", &*msg);
+        //appEngine.rootContext()->setContextProperty("msg", &*facade);
         QQmlComponent component(&appEngine, QUrl("qrc:/qml/main.qml"));
 
 
@@ -59,7 +57,7 @@ int main(int argc, char **argv)
 
         if (component.isReady()){
             component.create();
-            qDebug() << msg->getAuthor() <<  " created";
+            qDebug() <<   " created";
         }
 
         return app.exec();

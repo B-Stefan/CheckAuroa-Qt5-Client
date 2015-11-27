@@ -28,7 +28,7 @@ public:
 private:
     void getRatingCallback (HttpRequestWorker * worker);
     void getCurrentRatingCallback (HttpRequestWorker * worker);
-    
+
 signals:
     void getRatingSignal(QList<SWGRating*>* summary);
     void getCurrentRatingSignal(SWGRating* summary);

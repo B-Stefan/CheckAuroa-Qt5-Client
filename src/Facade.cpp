@@ -1,13 +1,13 @@
-#include "message.h"
+#include "Facade.h"
 
 namespace Swagger{
 
-    Message::Message()
+    Facade::Facade()
     {
 
     }
         // ALT
-    void Message::setAuthor(const QString &a) {
+    void Facade::setAuthor(const QString &a) {
         if (a != m_author) {
        //     QString tmp = QString::number(kpIndex);
             qDebug() << a;
@@ -16,7 +16,7 @@ namespace Swagger{
         }
     }
 
-    void Message::getCurRating(SWGRating* summary){
+    void Facade::getCurRating(SWGRating* summary){
         this->cKp = summary;
         if(cKp){
             kpIndex = cKp->getValue();
@@ -26,7 +26,7 @@ namespace Swagger{
         }
     }
 
-    void Message::setKpIndex(){
+    void Facade::setKpIndex(){
         if(cKp){
             kpIndex = cKp->getKp()->getKpValue();
         } else {
@@ -34,18 +34,16 @@ namespace Swagger{
         }
     }
 
-    double Message::getKpIndex(){
+    double Facade::getKpIndex(){
         qDebug() << kpIndex << "testnumber";
         return kpIndex;
     }
 
-    QString Message::getAuthor(){
-        return m_author;
-    }
 
-    QString Message::kpIndexString() const {
+    QString Facade::kpIndexString() const {
         return QString::number(kpIndex) + "%";
     }
+
 }
 
 

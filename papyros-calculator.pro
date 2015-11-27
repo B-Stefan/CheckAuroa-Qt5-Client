@@ -4,6 +4,7 @@ QT += widgets
 QT += svg
 QTPLUGIN += qsvg
 
+
 SOURCES += src/main.cpp \
     src/client/SWGError.cpp \
     src/client/SWGGeomagnaticLocation.cpp \
@@ -20,12 +21,13 @@ SOURCES += src/main.cpp \
     src/client/SWGRatingsApi.cpp \
     src/client/SWGWeatherApi.cpp \
     src/client/SWGWeatherInformation.cpp \
-    src/message.cpp
+    src/CurrentRatingManager.cpp \
+    src/RatingQmlData.cpp \
     src/qml/main.qml
 
 OTHER_FILES = README.md
 
-RESOURCES += src/papyros-calculator.qrc
+RESOURCES += src/resources.qrc
 
 CONFIG += staticlib
 
@@ -52,4 +54,5 @@ HEADERS += \
     src/client/SWGRatingsApi.h \
     src/client/SWGWeatherApi.h \
     src/client/SWGWeatherInformation.h \
-    src/message.h
+    src/CurrentRatingManager.h
+    src/RatingQmlData.h

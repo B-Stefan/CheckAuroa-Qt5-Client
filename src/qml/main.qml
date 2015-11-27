@@ -21,10 +21,10 @@ import QtQuick 2.5
 import Material 0.1
 import Material.ListItems 0.1 as ListItem
 import QtQuick.Layouts 1.0
-//import QtQuick.Controls 1.3 as Controls
 import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
 import QtQuick.Controls 1.4 as Controls
+import CheckAurora 1.0
 
 ApplicationWindow {
     id: calculator
@@ -39,7 +39,9 @@ ApplicationWindow {
     width: bigsize ? Units.dp(400) : Units.dp(247)
     minimumWidth: bigsize ? Units.dp(280): Units.dp(247)
     maximumWidth: bigsize ? 99999999 : Units.dp(247)
-    onWidthChanged: drawer.close()
+    onWidthChanged: calculator.width
+
+
     theme {
         accentColor: accentchosen
         primaryColor: "#000025"
@@ -57,53 +59,55 @@ ApplicationWindow {
     }
     initialPage: main
 
-    TabbedPage {
-        id: main
-        Component.onCompleted: entry.forceActiveFocus()
+    MainView {
+        TabbedPage {
+            id: main
+            Component.onCompleted: entry.forceActiveFocus()
 
-        Tab {
-            title: "Search by City"
-            iconName: "action/home"
 
-            Rectangle {
-                color: Palette.colors.white["200"]
+            Tab {
+                title: "Search by City"
+                //iconName: "action/home"
 
-                Button {
-                    anchors.centerIn: parent
-                    darkBackground: true
-                    text: "Go to tab 3"
-                    onClicked: main.selectedTab = 2
+                Rectangle {
+                    color: Palette.colors.white["200"]
+
+                    Button {
+                        anchors.centerIn: parent
+                        darkBackground: true
+                        text: "Go to tab 3"
+                        onClicked: {
+                            model.refreshRating()
+                        }
+                    }
                 }
             }
-        }
 
-        Tab {
-            title: "Current KP Index"
+            Tab {
+                id: currentRating
+                title: "Your location"
 
+               Rectangle {
 
+                    CurrentRatingBigCard{
 
-            Rectangle { color: Palette.colors.white["200"]
-
-                Text {
-                    anchors.centerIn: parent
-                    font.pointSize: 25
-                    text: msg.kpIndexString
-                    Component.onCompleted: {
-                        msg.kpIndexString = "Jonah"  // invokes Message::setAuthor()
                     }
 
-                }
+               }
 
             }
+
+            Tab {
+                title: "Settings"
+
+                Rectangle { color: Palette.colors.white["200"] }
+            }
+
+
+
         }
-
-        Tab {
-            title: "Settings"
-
-            Rectangle { color: Palette.colors.white["200"] }
-        }
-
 
 
     }
+
 }
