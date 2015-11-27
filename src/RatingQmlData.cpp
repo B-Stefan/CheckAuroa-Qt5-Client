@@ -3,6 +3,15 @@
 //
 
 #include "RatingQmlData.h"
+#include <QSignalMapper>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <QStringList>
+#include <QTimer>
+#include <QUrlQuery>
+#include <QElapsedTimer>
+#include <QLoggingCategory>
 
 RatingQmlData::RatingQmlData(QObject *parent) :
         QObject(parent) {

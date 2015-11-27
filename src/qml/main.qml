@@ -113,7 +113,7 @@ ApplicationWindow {
                             console.log(latitude,longitude)
                         }
                     }
-                    CurrentRatingBigCard{
+                    CurrentRatingBigCard {
 
                     }
 
