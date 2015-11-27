@@ -1,8 +1,8 @@
 QT += quick qml
 QT += widgets
-
 QT += svg
 QTPLUGIN += qsvg
+
 
 
 SOURCES += src/main.cpp \

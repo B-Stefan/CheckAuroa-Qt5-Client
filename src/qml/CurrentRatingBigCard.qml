@@ -31,6 +31,20 @@ Card {
        }
    ]
 
+   PositionSource {
+          id: positionSource
+          updateInterval: 36000
+          active: true
+          onPositionChanged: {
+                console.log("Position Changed" + positionSource.position.coordinate.latitude);
+                model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+          }
+
+          onUpdateTimeout: {
+              activityText.fadeOut = true
+          }
+      }
+
    CurrentRatingManager {
        id: model
        onReadyChanged: {
@@ -39,7 +53,7 @@ Card {
        }
    }
    Component.onCompleted: {
-       model.refreshRating()
+       model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {

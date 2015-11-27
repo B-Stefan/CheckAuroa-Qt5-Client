@@ -61,14 +61,14 @@ ApplicationWindow {
     initialPage: main
 
     MainView {
-        PositionSource {
+        /*PositionSource {
                id: positionSource
                onPositionChanged: { console.log("Position Changed"); }
         
                onUpdateTimeout: {
                    activityText.fadeOut = true
                }
-           }
+           }*/
 
         TabbedPage {
             id: main
@@ -99,7 +99,7 @@ ApplicationWindow {
 
                Rectangle {
 
-                    onVisibleChanged: {
+                 /*   onVisibleChanged: {
                         if (!this.activeFocus){
         
                             if (positionSource.supportedPositioningMethods ===
@@ -112,7 +112,7 @@ ApplicationWindow {
                             var longitude = positionSource.position.coordinate.longitude
                             console.log(latitude,longitude)
                         }
-                    }
+                    }*/
                     CurrentRatingBigCard {
 
                     }

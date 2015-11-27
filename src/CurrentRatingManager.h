@@ -44,11 +44,11 @@ public:
     RatingQmlData *currentRating() const;
 
 public slots:
-    Q_INVOKABLE void refreshRating();
+    Q_INVOKABLE void refreshRating(double lat, double lng);
 
 public slots:
 
-    void queryCurrentRating();
+    void queryCurrentRating(double lat, double lng);
 
     void queryRatings();
 
