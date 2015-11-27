@@ -99,20 +99,6 @@ ApplicationWindow {
 
                Rectangle {
 
-                 /*   onVisibleChanged: {
-                        if (!this.activeFocus){
-        
-                            if (positionSource.supportedPositioningMethods ===
-                                    PositionSource.NoPositioningMethods) {
-                                positionSource.nmeaSource = "nmealog.txt";
-                                sourceText.text = "(filesource): " + printableMethod(positionSource.supportedPositioningMethods);
-                            }
-                            positionSource.update();
-                            var latitude = positionSource.position.coordinate.latitude
-                            var longitude = positionSource.position.coordinate.longitude
-                            console.log(latitude,longitude)
-                        }
-                    }*/
                     CurrentRatingBigCard {
 
                     }
@@ -122,9 +108,14 @@ ApplicationWindow {
             }
 
             Tab {
-                title: "Settings"
+                title: "Weather"
 
-                Rectangle { color: Palette.colors.white["200"] }
+                Rectangle {
+
+                    CurrentWeatherBigCard {
+
+                    }
+                }
             }
 
 

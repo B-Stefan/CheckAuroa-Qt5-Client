@@ -1,9 +1,5 @@
-//
-// Created by Stefan B. on 27.11.15.
-//
-
-#ifndef QT_CLIENT_RATINGQMLDATA_H
-#define QT_CLIENT_RATINGQMLDATA_H
+#ifndef QT_CLIENT_WEATHERQMLDATA_H
+#define QT_CLIENT_WEATHERQMLDATA_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -11,24 +7,30 @@
 #include <QtQml/QQmlListProperty>
 
 
-class RatingQmlData : public QObject {
+class WeatherQmlData : public QObject {
     Q_OBJECT
             Q_PROPERTY(QDateTime date
                        READ getDate
                        WRITE setDate
                        NOTIFY
                        dataChanged)
+
     Q_PROPERTY(double value
                READ getValue
                WRITE setValue
                NOTIFY
                dataChanged)
 
+    Q_PROPERTY(QString icon
+               READ getIcon
+               WRITE setIcon
+               NOTIFY
+               dataChanged)
 
 public:
-    explicit RatingQmlData(QObject *parent = 0);
+    explicit WeatherQmlData(QObject *parent = 0);
 
-    RatingQmlData(const RatingQmlData &other);
+    WeatherQmlData(const WeatherQmlData &other);
 
     void setValue(double val);
 
@@ -38,6 +40,10 @@ public:
 
     QDateTime getDate();
 
+    void setIcon(QString ico);
+
+    QString getIcon();
+
     signals:
 
     void dataChanged();
@@ -45,11 +51,10 @@ public:
 private:
     double m_value;
     QDateTime m_date;
-
-
+    QString m_icon;
 };
 
-Q_DECLARE_METATYPE(RatingQmlData)
+Q_DECLARE_METATYPE(WeatherQmlData)
 
 
-#endif //QT_CLIENT_RATINGQMLDATA_H
+#endif //QT_CLIENT_WEATHERQMLDATA_H

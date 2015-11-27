@@ -14,7 +14,7 @@
 
 using  namespace Swagger;
 
-Q_LOGGING_CATEGORY(requestsLog, "wapp.requests")
+//Q_LOGGING_CATEGORY(requestsLog, "wapp.requests")
 
 class AppModelPrivate {
 public:
@@ -87,8 +87,8 @@ void CurrentRatingManager::queryCurrentRating(double lat, double lng) {
 
 
 void CurrentRatingManager::handleCurrentRatingResponse(SWGRating* rating) {
-    qCDebug(requestsLog) << "got weather network data";
-    qCDebug(requestsLog) << rating->getValue();
+   // qCDebug(requestsLog) << "got weather network data";
+   // qCDebug(requestsLog) << rating->getValue();
     d->now.setValue(rating->getValue());
     d->ready = true;
     emit readyChanged();

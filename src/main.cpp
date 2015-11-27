@@ -31,10 +31,12 @@ typedef QGuiApplication Application;
 #include <QCoreApplication>
 #include <QObject>
 #include "CurrentRatingManager.h"
+#include "CurrentWeatherManager.h"
 #include <QQmlComponent>
 #include <QQmlEngine>
 
 #include "RatingQmlData.h"
+#include "WeatherQmlData.h"
 using namespace Swagger;
 
 int main(int argc, char **argv)
@@ -43,6 +45,9 @@ int main(int argc, char **argv)
 
         qmlRegisterType<RatingQmlData>("CheckAurora", 1, 0, "RatingQmlData");
         qmlRegisterType<CurrentRatingManager>("CheckAurora", 1, 0, "CurrentRatingManager");
+        qmlRegisterType<WeatherQmlData>("CheckAurora", 1, 0, "WeatherQmlData");
+        qmlRegisterType<CurrentWeatherManager>("CheckAurora", 1, 0, "CurrentWeatherManager");
+
 
         QQmlApplicationEngine appEngine;
 

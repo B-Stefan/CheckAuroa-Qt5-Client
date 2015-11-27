@@ -4,5 +4,6 @@
         <file>qml/CurrentRatingBigCard.qml</file>
         <file>qml/SubPage.qml</file>
         <file>qml/CalculatorButton.qml</file>
+        <file>qml/CurrentWeatherBigCard.qml</file>
     </qresource>
 </RCC>
