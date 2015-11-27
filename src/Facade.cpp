@@ -6,13 +6,38 @@ namespace Swagger{
     {
 
     }
+
+    void Message::writeLatitude(const QString &latt) {
+        if (latt != lat) {
+            lat = latt;
+            qDebug() << lat;
+            emit dataChanged();
+        }
+    }
+
+    QString Message::latitude() const {
+        return lat;
+    }
+
+    void Message::writeLongitude(const QString &lngg) {
+        if (lngg != lng) {
+            lng = lngg;
+            qDebug() << lng;
+            emit dataChanged();
+        }
+    }
+
+    QString Message::longitude() const {
+        return lng;
+    }
+
         // ALT
     void Facade::setAuthor(const QString &a) {
         if (a != m_author) {
        //     QString tmp = QString::number(kpIndex);
             qDebug() << a;
             m_author = a;
-            emit authorChanged();
+            emit dataChanged();
         }
     }
 

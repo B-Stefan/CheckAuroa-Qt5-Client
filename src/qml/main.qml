@@ -25,6 +25,7 @@ import QtQuick.Window 2.1
 import Qt.labs.settings 1.0
 import QtQuick.Controls 1.4 as Controls
 import CheckAurora 1.0
+import QtPositioning 5.3
 
 ApplicationWindow {
     id: calculator
@@ -60,6 +61,15 @@ ApplicationWindow {
     initialPage: main
 
     MainView {
+        PositionSource {
+               id: positionSource
+               onPositionChanged: { console.log("Position Changed"); }
+        
+               onUpdateTimeout: {
+                   activityText.fadeOut = true
+               }
+           }
+
         TabbedPage {
             id: main
             Component.onCompleted: entry.forceActiveFocus()
@@ -89,6 +99,20 @@ ApplicationWindow {
 
                Rectangle {
 
+                    onVisibleChanged: {
+                        if (!this.activeFocus){
+        
+                            if (positionSource.supportedPositioningMethods ===
+                                    PositionSource.NoPositioningMethods) {
+                                positionSource.nmeaSource = "nmealog.txt";
+                                sourceText.text = "(filesource): " + printableMethod(positionSource.supportedPositioningMethods);
+                            }
+                            positionSource.update();
+                            var latitude = positionSource.position.coordinate.latitude
+                            var longitude = positionSource.position.coordinate.longitude
+                            console.log(latitude,longitude)
+                        }
+                    }
                     CurrentRatingBigCard{
 
                     }
