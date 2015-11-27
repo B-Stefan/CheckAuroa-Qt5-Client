@@ -97,7 +97,9 @@ void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* 
 
     // setting the Icon will crash the Application for an unknown reason
 
-    d->now.setIcon(*tmp);
+    //d->now.setIcon(*tmp);
+
+    d->now.setValue(weather->getCloudCover());
     d->ready = true;
     emit readyChanged();
 

@@ -68,7 +68,7 @@ Card {
        anchors.centerIn: parent
        font.pointSize: 25
        //text: (weatherModel.currentWeather.value*100)  + "% ccover"
-        text:(weatherModel.currentWeather.icon) + ""
+        text:(weatherModel.currentWeather.value) + ""
    }
 
 }
