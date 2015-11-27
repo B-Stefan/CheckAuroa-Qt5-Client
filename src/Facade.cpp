@@ -7,7 +7,7 @@ namespace Swagger{
 
     }
 
-    void Message::writeLatitude(const QString &latt) {
+    void Facade::writeLatitude(const QString &latt) {
         if (latt != lat) {
             lat = latt;
             qDebug() << lat;
@@ -15,11 +15,11 @@ namespace Swagger{
         }
     }
 
-    QString Message::latitude() const {
+    QString Facade::latitude() const {
         return lat;
     }
 
-    void Message::writeLongitude(const QString &lngg) {
+    void Facade::writeLongitude(const QString &lngg) {
         if (lngg != lng) {
             lng = lngg;
             qDebug() << lng;
@@ -27,7 +27,7 @@ namespace Swagger{
         }
     }
 
-    QString Message::longitude() const {
+    QString Facade::longitude() const {
         return lng;
     }
 

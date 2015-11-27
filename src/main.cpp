@@ -44,10 +44,6 @@ int main(int argc, char **argv)
         qmlRegisterType<RatingQmlData>("CheckAurora", 1, 0, "RatingQmlData");
         qmlRegisterType<CurrentRatingManager>("CheckAurora", 1, 0, "CurrentRatingManager");
 
-        SWGRatingsApi * ratingsApi = new SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
-        ratingsApi->getCurrentRating(60.0,20.9, new QString("now"));
-        QObject::connect(ratingsApi, SIGNAL(Swagger::SWGRatingsApi::getCurrentRatingSignal(SWGRating* summary)), msg, SLOT(Swagger::Message::getCurRating(SWGRating* summary)));
-
         QQmlApplicationEngine appEngine;
 
         //appEngine.rootContext()->setContextProperty("msg", &*facade);

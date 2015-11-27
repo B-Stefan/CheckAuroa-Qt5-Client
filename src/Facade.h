@@ -22,7 +22,6 @@ public:
     QString kpIndexString() const;
     QString latitude() const;
     QString longitude() const;
-    QString getAuthor();
     void writeLatitude  (const QString &latt);
     void writeLongitude (const QString &lngg);
 signals:
