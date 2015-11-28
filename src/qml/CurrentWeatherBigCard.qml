@@ -53,7 +53,7 @@ Card {
        }
    }
    Component.onCompleted: {
-       // weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+      //  weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {
@@ -62,13 +62,22 @@ Card {
 
    }
 
+   /*
    Text {
        font.pixelSize: 100
        id: currentRatingTxt
        anchors.centerIn: parent
        font.pointSize: 25
      //  text: (weatherModel.currentWeather.value*100)  + "% ccover"
-       text: (weatherModel.currentWeather.icon)
+     //  text: (weatherModel.currentWeather.icon)
    }
+*/
+   Image {
+       id: currentRatingTxt
+       anchors.centerIn: parent
+       width: 200; height: 200
+       source: "/qml/images/weather/"+weatherModel.currentWeather.icon+".svg"
+   }
+
 
 }

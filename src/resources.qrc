@@ -5,5 +5,16 @@
         <file>qml/SubPage.qml</file>
         <file>qml/CalculatorButton.qml</file>
         <file>qml/CurrentWeatherBigCard.qml</file>
+        <file>qml/images/weather/clear-day.svg</file>
+        <file>qml/images/weather/clear-night.svg</file>
+        <file>qml/images/weather/Cloudy.svg</file>
+        <file>qml/images/weather/fog.svg</file>
+        <file>qml/images/weather/partly-cloudy-day.svg</file>
+        <file>qml/images/weather/partly-cloudy-night.svg</file>
+        <file>qml/images/weather/rain.svg</file>
+        <file>qml/images/weather/sleet.svg</file>
+        <file>qml/images/weather/snow.svg</file>
+        <file>qml/images/weather/thunderstorm.svg</file>
+        <file>qml/images/weather/wind.svg</file>
     </qresource>
 </RCC>

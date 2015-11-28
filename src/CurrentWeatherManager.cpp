@@ -100,7 +100,7 @@ void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* 
    // d->now.setValue(weather->getCloudCover());
     QString * hans = new QString(weather->getIcon()->toLatin1());
 
-    qDebug() << "Ausgabe: " +  d->now.getIcon();
+    //qDebug() << "Ausgabe: " +  d->now.getIcon();
 
     d->now.setIcon(* hans);
 
