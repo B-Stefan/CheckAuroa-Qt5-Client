@@ -34,6 +34,7 @@ typedef QGuiApplication Application;
 #include "CurrentWeatherManager.h"
 #include <QQmlComponent>
 #include <QQmlEngine>
+#include <QtQuick>
 
 #include "RatingQmlData.h"
 #include "WeatherQmlData.h"

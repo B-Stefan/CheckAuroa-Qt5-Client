@@ -1,7 +1,3 @@
-//
-// Created by Stefan B. on 27.11.15.
-//
-
 #ifndef QT_CLIENT_RATINGQMLDATA_H
 #define QT_CLIENT_RATINGQMLDATA_H
 

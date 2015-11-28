@@ -5,7 +5,7 @@
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
 #include <QtQml/QQmlListProperty>
-
+#include <QtQuick>
 
 class WeatherQmlData : public QObject {
     Q_OBJECT

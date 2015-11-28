@@ -12,6 +12,7 @@
 #include <QUrlQuery>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QtQuick>
 
 RatingQmlData::RatingQmlData(QObject *parent) :
         QObject(parent) {

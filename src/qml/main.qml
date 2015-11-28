@@ -35,9 +35,9 @@ ApplicationWindow {
     property string accentchosen: "#E91E63"
     property var history: []
     property var history_pos: history.length - 1
-    height: Units.dp(300)
+    height: Screen.height
     minimumHeight:  Units.dp(200)
-    width: bigsize ? Units.dp(400) : Units.dp(247)
+    width: Screen.width
     minimumWidth: bigsize ? Units.dp(280): Units.dp(247)
     maximumWidth: bigsize ? 99999999 : Units.dp(247)
     onWidthChanged: calculator.width

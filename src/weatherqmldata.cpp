@@ -8,9 +8,12 @@
 #include <QUrlQuery>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QtQuick>
 
 WeatherQmlData::WeatherQmlData(QObject *parent) :
         QObject(parent) {
+this->m_icon = "blub";
+
 }
 
 WeatherQmlData::WeatherQmlData(const WeatherQmlData &other) :
@@ -18,6 +21,7 @@ WeatherQmlData::WeatherQmlData(const WeatherQmlData &other) :
         m_date(other.m_date),
         m_value(other.m_value),
         m_icon(other.m_icon){
+this->m_icon = "blub";
 }
 
 QDateTime WeatherQmlData::getDate() {

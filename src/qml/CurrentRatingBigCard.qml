@@ -53,7 +53,7 @@ Card {
        }
    }
    Component.onCompleted: {
-       model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+   //    model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {

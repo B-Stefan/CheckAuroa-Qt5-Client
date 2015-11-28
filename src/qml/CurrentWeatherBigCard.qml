@@ -53,7 +53,7 @@ Card {
        }
    }
    Component.onCompleted: {
-       weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+       // weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {
@@ -67,8 +67,8 @@ Card {
        id: currentRatingTxt
        anchors.centerIn: parent
        font.pointSize: 25
-       //text: (weatherModel.currentWeather.value*100)  + "% ccover"
-        text:(weatherModel.currentWeather.value) + ""
+     //  text: (weatherModel.currentWeather.value*100)  + "% ccover"
+       text: (weatherModel.currentWeather.icon)
    }
 
 }

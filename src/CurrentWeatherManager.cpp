@@ -10,13 +10,14 @@
 #include <QUrlQuery>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QtQuick>
 
 
 using  namespace Swagger;
 
 Q_LOGGING_CATEGORY(requestsLog, "wapp.requests")
 
-class AppModelPrivate {
+class CurrentWeatherManagerPrivate {
 public:
     QString longitude, latitude;
     WeatherQmlData now;
@@ -26,7 +27,7 @@ public:
                    *forecastWeatherReplyMapper;
     bool ready;
 
-    AppModelPrivate() :
+    CurrentWeatherManagerPrivate() :
             fcProp(NULL),
             ready(false)
             {
@@ -39,22 +40,22 @@ static void forecastAppend(QQmlListProperty<WeatherQmlData> *prop, WeatherQmlDat
 }
 
 static WeatherQmlData *forecastAt(QQmlListProperty<WeatherQmlData> *prop, int index) {
-    AppModelPrivate *d = static_cast<AppModelPrivate *>(prop->data);
+    CurrentWeatherManagerPrivate *d = static_cast<CurrentWeatherManagerPrivate *>(prop->data);
     return d->forecast.at(index);
 }
 
 static int forecastCount(QQmlListProperty<WeatherQmlData> *prop) {
-    AppModelPrivate *d = static_cast<AppModelPrivate *>(prop->data);
+    CurrentWeatherManagerPrivate *d = static_cast<CurrentWeatherManagerPrivate *>(prop->data);
     return d->forecast.size();
 }
 
 static void forecastClear(QQmlListProperty<WeatherQmlData> *prop) {
-    static_cast<AppModelPrivate *>(prop->data)->forecast.clear();
+    static_cast<CurrentWeatherManagerPrivate *>(prop->data)->forecast.clear();
 }
 
 CurrentWeatherManager::CurrentWeatherManager(QObject *parent) :
         QObject(parent),
-        d(new AppModelPrivate) {
+        d(new CurrentWeatherManagerPrivate) {
     d->fcProp = new QQmlListProperty<WeatherQmlData>(this, d,
                                                   forecastAppend,
                                                   forecastCount,
@@ -88,18 +89,21 @@ void CurrentWeatherManager::queryCurrentWeather(double lat, double lng) {
 
 void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* weather) {
     qCDebug(requestsLog) << "got weather network data";
-    qCDebug(requestsLog) << weather->getCloudCover();
+    qCDebug(requestsLog) << weather->getIcon();
     //d->now.setValue(weather->getCloudCover());
-    QString* tmp = weather->getIcon();
+   // QString* tmp = weather->getIcon();
     //qDebug() << "&: " + &tmp;
-    qDebug() << *tmp;
+    //qDebug() << *tmp;
     // d->now.setValue(weather->getCloudCover());
-
     // setting the Icon will crash the Application for an unknown reason
+  //  d->now.setIcon(*weather->getIcon());
+   // d->now.setValue(weather->getCloudCover());
+    QString * hans = new QString(weather->getIcon()->toLatin1());
 
-    //d->now.setIcon(*tmp);
+    qDebug() << "Ausgabe: " +  d->now.getIcon();
 
-    d->now.setValue(weather->getCloudCover());
+    d->now.setIcon(* hans);
+
     d->ready = true;
     emit readyChanged();
 

@@ -10,6 +10,7 @@
 #include <QUrlQuery>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QtQuick>
 
 
 using  namespace Swagger;
