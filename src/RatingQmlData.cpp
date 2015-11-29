@@ -22,6 +22,11 @@ RatingQmlData::RatingQmlData(const RatingQmlData &other) :
         m_date(other.m_date),
         m_value(other.m_value){
 }
+RatingQmlData::RatingQmlData(Swagger::SWGRating * other) :
+        QObject(0){
+
+}
+
 
 QDateTime RatingQmlData::getDate() {
     return  this->m_date;

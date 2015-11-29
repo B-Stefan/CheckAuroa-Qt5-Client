@@ -9,7 +9,7 @@
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
 #include <QtQml/QQmlListProperty>
-
+#include "src/client/SWGRating.h"
 
 class RatingQmlData : public QObject {
     Q_OBJECT
@@ -28,6 +28,7 @@ public:
     explicit RatingQmlData(QObject *parent = 0);
 
     RatingQmlData(const RatingQmlData &other);
+    RatingQmlData(Swagger::SWGRating *rating);
 
     void setValue(double val);
 
