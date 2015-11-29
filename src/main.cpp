@@ -30,17 +30,17 @@ typedef QGuiApplication Application;
 #include <QLabel>
 #include <QCoreApplication>
 #include <QObject>
-#include "CurrentRatingManager.h"
-#include "RatingsManager.h"
-#include "CurrentWeatherManager.h"
+#include "src/qmlManager/CurrentRatingManager.h"
+#include "src/qmlManager/RatingsManager.h"
+#include "src/qmlManager/CurrentWeatherManager.h"
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QtQuick>
 
-#include "RatingQmlData.h"
-#include "KpValueManager.h"
-#include "KpValueQmlData.h"
-#include "WeatherQmlData.h"
+#include "src/qmlData/RatingQmlData.h"
+#include "src/qmlManager/KpValueManager.h"
+#include "src/qmlData/KpValueQmlData.h"
+#include "src/qmlData/weatherqmldata.h"
 using namespace Swagger;
 
 int main(int argc, char **argv)

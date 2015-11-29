@@ -1,4 +1,4 @@
-#include "WeatherQmlData.h"
+#include "weatherqmldata.h"
 #include <QSignalMapper>
 #include <QJsonDocument>
 #include <QJsonObject>

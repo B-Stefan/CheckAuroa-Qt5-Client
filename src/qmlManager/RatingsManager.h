@@ -13,7 +13,7 @@
 
 #include <QtPositioning/QGeoPositionInfoSource>
 #include <src/client/SWGRating.h>
-#include <src/RatingQmlData.h>
+#include <src/qmlData/RatingQmlData.h>
 
 
 using  namespace Swagger;

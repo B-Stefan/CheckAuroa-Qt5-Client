@@ -91,8 +91,8 @@ Item {
                 str = str + " - Tomorrow"
             }
             labels.push(str)
-            //predictionValue.pus(m.value);
-            predictionValues.push(Math.random()*100);
+            predictionValues.push(m.value);
+            //predictionValues.push(Math.random()*100);
 
            }
            datasets.push({

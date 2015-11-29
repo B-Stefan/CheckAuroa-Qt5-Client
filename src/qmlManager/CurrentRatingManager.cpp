@@ -61,7 +61,7 @@ void CurrentRatingManager::queryCurrentRating(double lat, double lng) {
 
 
 void CurrentRatingManager::handleCurrentRatingResponse(SWGRating* rating) {
-    d->now.setValue(0.8);
+    d->now.setValue(rating->getValue());
    // qCDebug(requestsLog) << "got weather network data";
    // qCDebug(requestsLog) << rating->getValue();
    // d->now.setValue(rating->getValue());

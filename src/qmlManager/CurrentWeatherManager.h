@@ -8,7 +8,7 @@
 
 #include <QtPositioning/QGeoPositionInfoSource>
 #include <src/client/SWGWeatherInformation.h>
-#include <src/WeatherQmlData.h>
+#include "src/qmlData/weatherqmldata.h"
 
 using namespace Swagger;
 

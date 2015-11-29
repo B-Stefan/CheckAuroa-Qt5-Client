@@ -2,7 +2,7 @@
 // Created by Stefan B. on 27.11.15.
 //
 
-#include "KpValueQmlData.h"
+#include "src/qmlData/KpValueQmlData.h"
 #include <QSignalMapper>
 #include <QJsonDocument>
 #include <QJsonObject>

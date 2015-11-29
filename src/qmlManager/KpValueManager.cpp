@@ -17,7 +17,7 @@
 #include <QLoggingCategory>
 
 #include "src/client/SWGKpInformation.h"
-#include "src/KpValueQmlData.h"
+#include "src/qmlData/KpValueQmlData.h"
 
 using namespace Swagger;
 
