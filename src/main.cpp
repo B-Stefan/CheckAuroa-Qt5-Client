@@ -32,7 +32,7 @@ typedef QGuiApplication Application;
 #include <QObject>
 #include "CurrentRatingManager.h"
 #include "RatingsManager.h"
-#include "CurrentWeatherManager.h"
+#include "currentweathermanager.h"
 #include <QQmlComponent>
 #include <QQmlEngine>
 #include <QtQuick>

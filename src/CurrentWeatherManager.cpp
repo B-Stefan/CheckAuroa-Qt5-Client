@@ -1,4 +1,4 @@
-#include "CurrentWeatherManager.h"
+#include "currentweathermanager.h"
 
 #include "src/client/SWGWeatherApi.h"
 #include <QSignalMapper>
@@ -15,7 +15,7 @@
 
 using  namespace Swagger;
 
-Q_LOGGING_CATEGORY(requestsLog, "wapp.requests")
+Q_LOGGING_CATEGORY(requestsLogWeather, "wapp.CurrentWeahterManager")
 
 class CurrentWeatherManagerPrivate {
 public:
@@ -53,7 +53,7 @@ static void forecastClear(QQmlListProperty<WeatherQmlData> *prop) {
     static_cast<CurrentWeatherManagerPrivate *>(prop->data)->forecast.clear();
 }
 
-CurrentWeatherManager::CurrentWeatherManager(QObject *parent) :
+currentweathermanager::currentweathermanager(QObject *parent) :
         QObject(parent),
         d(new CurrentWeatherManagerPrivate) {
     d->fcProp = new QQmlListProperty<WeatherQmlData>(this, d,
@@ -68,12 +68,12 @@ CurrentWeatherManager::CurrentWeatherManager(QObject *parent) :
 
 }
 
-CurrentWeatherManager::~CurrentWeatherManager() {
+currentweathermanager::~currentweathermanager() {
     delete d;
 }
 
 
-void CurrentWeatherManager::queryCurrentWeather(double lat, double lng) {
+void currentweathermanager::queryCurrentWeather(double lat, double lng) {
     //don't update more often then once a minute
     //to keep load on server low
 
@@ -87,9 +87,9 @@ void CurrentWeatherManager::queryCurrentWeather(double lat, double lng) {
 }
 
 
-void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* weather) {
-    qCDebug(requestsLog) << "got weather network data";
-    qCDebug(requestsLog) << weather->getIcon();
+void currentweathermanager::handleCurrentWeatherResponse(SWGWeatherInformation* weather) {
+    qCDebug(requestsLogWeather) << "got weather network data";
+    qCDebug(requestsLogWeather) << weather->getIcon();
     //d->now.setValue(weather->getCloudCover());
    // QString* tmp = weather->getIcon();
     //qDebug() << "&: " + &tmp;
@@ -108,22 +108,22 @@ void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* 
     emit readyChanged();
 
 }
-void CurrentWeatherManager::refreshWeather(double lat, double lng) {
+void currentweathermanager::refreshWeather(double lat, double lng) {
     this->queryCurrentWeather(lat, lng);
 }
 
-WeatherQmlData *CurrentWeatherManager::currentWeather() const {
+WeatherQmlData *currentweathermanager::currentWeather() const {
     return &(d->now);
 }
 
-QQmlListProperty<WeatherQmlData> CurrentWeatherManager::weather() const {
+QQmlListProperty<WeatherQmlData> currentweathermanager::weather() const {
     return *(d->fcProp);
 }
 
-bool CurrentWeatherManager::ready() const {
+bool currentweathermanager::ready() const {
     return d->ready;
 }
 
-void CurrentWeatherManager::queryWeather() {
+void currentweathermanager::queryWeather() {
 
 }

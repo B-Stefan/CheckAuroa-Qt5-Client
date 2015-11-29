@@ -5,7 +5,6 @@
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
 #include <QtQml/QQmlListProperty>
-#include <QtQuick>
 
 #include <QtPositioning/QGeoPositionInfoSource>
 #include <src/client/SWGWeatherInformation.h>
@@ -15,7 +14,7 @@ using namespace Swagger;
 
 class CurrentWeatherManagerPrivate;
 
-class CurrentWeatherManager : public QObject {
+class currentweathermanager : public QObject {
 
     Q_OBJECT
     Q_PROPERTY(bool ready
@@ -33,9 +32,9 @@ class CurrentWeatherManager : public QObject {
                        weatherChanged)
 
 public:
-    explicit CurrentWeatherManager(QObject *parent = 0);
+    explicit currentweathermanager(QObject *parent = 0);
 
-    ~CurrentWeatherManager();
+    ~currentweathermanager();
 
     bool ready() const;
 
