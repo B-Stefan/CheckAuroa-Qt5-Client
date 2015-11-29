@@ -4,9 +4,12 @@
         <file>qml/CurrentRatingBigCard.qml</file>
         <file>qml/RatingsChartCard.qml</file>
         <file>qml/KpValueChart.qml</file>
+        <file>qml/SearchByCity.qml</file>
+        <file>qml/Overview.qml</file>
         <file>qml/SubPage.qml</file>
         <file>qml/charts/QChart.js</file>
         <file>qml/charts/QChart.qml</file>
+        <file>qml/OverviewPage.qml</file>
         <file>qml/CalculatorButton.qml</file>
         <file>qml/CurrentWeatherBigCard.qml</file>
         <file>qml/images/weather/clear-day.svg</file>

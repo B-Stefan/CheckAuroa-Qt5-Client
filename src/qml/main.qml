@@ -32,7 +32,7 @@ import QtQuick.Layouts 1.1
 ApplicationWindow {
     id: calculator
     visible: true
-    title: 'Calculator'
+    title: 'Check Aurora'
     property bool bigsize: true
     property string accentchosen: "#E91E63"
     property var history: []
@@ -61,206 +61,128 @@ ApplicationWindow {
         property alias history_pos: calculator.history_pos
     }
     initialPage: main
-
-    MainView {
-        /*PositionSource {
-               id: positionSource
-               onPositionChanged: { console.log("Position Changed"); }
-        
-               onUpdateTimeout: {
-                   activityText.fadeOut = true
-               }
-           }*/
-
-        TabbedPage {
-            id: main
-            Component.onCompleted: entry.forceActiveFocus()
-
-            Tab {
-                title: "Search by City"
-                //iconName: "action/home"
-
-                Rectangle {
-                    color: Palette.colors.white["200"]
-
-                    Button {
-                        anchors.centerIn: parent
-                        darkBackground: true
-                        text: "Go to tab 3"
-                        onClicked: {
-                            model.refreshRating()
-                        }
+    TabbedPage {
+        actions: [
+                    Action {
+                        iconName: "image/color_lens"
+                        name: "Colors"
+                        onTriggered: colorPicker.show()
                     }
-                }
+                ]
+        id: main
+        Component.onCompleted: entry.forceActiveFocus()
+
+        Dialog {
+            id: colorPicker
+            title: "Pick color"
+
+            positiveButtonText: "Done"
+
+            MenuField {
+                id: selection
+                model: ["Primary color", "Accent color", "Background color"]
+                width: Units.dp(160)
             }
 
-            Tab {
-                id: currentRating
-                title: "Your location"
-                anchors.fill: parent
-                Controls.ScrollView
-                    {
-                        onVisibleChanged: {
-                            if (!this.activeFocus){
+            Grid {
+                columns: 7
+                spacing: Units.dp(8)
 
-                                if (positionSource.supportedPositioningMethods ===
-                                        PositionSource.NoPositioningMethods) {
-                                    positionSource.nmeaSource = "nmealog.txt";
-                                    sourceText.text = "(filesource): " + printableMethod(positionSource.supportedPositioningMethods);
+                Repeater {
+                    model: [
+                        "red", "pink", "purple", "deepPurple", "indigo",
+                        "blue", "lightBlue", "cyan", "teal", "green",
+                        "lightGreen", "lime", "yellow", "amber", "orange",
+                        "deepOrange", "grey", "blueGrey", "brown", "black",
+                        "white"
+                    ]
+
+                    Rectangle {
+                        width: Units.dp(30)
+                        height: Units.dp(30)
+                        radius: Units.dp(2)
+                        color: Palette.colors[modelData]["500"]
+                        border.width: modelData === "white" ? Units.dp(2) : 0
+                        border.color: Theme.alpha("#000", 0.26)
+
+                        Ink {
+                            anchors.fill: parent
+
+                            onPressed: {
+                                switch(selection.selectedIndex) {
+                                    case 0:
+                                        theme.primaryColor = parent.color
+                                        break;
+                                    case 1:
+                                        theme.accentColor = parent.color
+                                        break;
+                                    case 2:
+                                        theme.backgroundColor = parent.color
+                                        break;
                                 }
-                                positionSource.update();
-                                var latitude = positionSource.position.coordinate.latitude
-                                var longitude = positionSource.position.coordinate.longitude
-                                console.log(latitude,longitude)
                             }
                         }
-                        anchors.fill: parent
-
-                        ColumnLayout {     // <--- unique child
-                            spacing: 30
-
-                            width: calculator.width      // ensure correct width
-                            height: children.height     // ensure correct height
-
-                            Card {
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.preferredWidth: Units.dp(400)
-                                Layout.preferredHeight: Units.dp(200)
-                                ColumnLayout{
-                                   spacing: Units.dp(10)
-                                   anchors.centerIn: parent
-                                   width: parent.width * 0.8
-                                   height: parent.height * 0.8
-                                   Label {
-                                       Layout.alignment: Qt.AlignLeft
-                                       Layout.preferredWidth: 40
-                                       text: "Live Aurora probability"
-                                       style: "subheading"
-                                   }
-
-                                   Rectangle {
-                                       Layout.alignment: Qt.AlignCenter
-                                       Layout.preferredWidth: parent.width
-                                       Layout.preferredHeight: parent.height
-                                       CurrentRatingBigCard {
-                                          anchors.centerIn: parent
-                                          Layout.alignment: Qt.AlignHCenter
-                                          width: parent.width
-                                      }
-                                   }
-                               }
-
-                            }
-
-                            Card {
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.preferredWidth: Units.dp(400)
-                                Layout.preferredHeight: Units.dp(500)
-                                ColumnLayout{
-                                   spacing: Units.dp(10)
-                                   anchors.centerIn: parent
-                                   width: parent.width * 0.8
-                                   height: parent.height * 0.8
-                                   Label {
-                                       Layout.alignment: Qt.AlignLeft
-                                       Layout.preferredWidth: 40
-                                       text: "Probability next 24 hours"
-                                       style: "subheading"
-                                   }
-                                    Label {
-                                       Layout.alignment: Qt.AlignLeft
-                                       Layout.preferredWidth: parent.width
-                                       Layout.preferredHeight: Units.dp(100)
-                                       wrapMode: Text.WordWrap
-                                       text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor  invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-                                   }
-
-                                   Rectangle {
-                                       Layout.alignment: Qt.AlignCenter
-                                       Layout.preferredWidth: parent.width
-                                       Layout.preferredHeight: Units.dp(200)
-                                       RatingsChartCard {
-                                        width:parent.width
-                                        height: parent.height
-                                       }
-                                   }
-                               }
-
-                            }
-
-                            Card {
-                                Layout.alignment: Qt.AlignHCenter
-                                Layout.preferredWidth: Units.dp(400)
-                                Layout.preferredHeight: Units.dp(500)
-                                ColumnLayout{
-                                   spacing: Units.dp(10)
-                                   anchors.centerIn: parent
-                                   width: parent.width * 0.8
-                                   height: parent.height * 0.8
-                                   Label {
-                                       Layout.alignment: Qt.AlignLeft
-                                       Layout.preferredWidth: 40
-                                       text: "Kp Index next 24 hours"
-                                       style: "subheading"
-                                   }
-                                    Label {
-                                       Layout.alignment: Qt.AlignLeft
-                                       Layout.preferredWidth: parent.width
-                                       Layout.preferredHeight: Units.dp(100)
-                                       wrapMode: Text.WordWrap
-                                       text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor  invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-                                   }
-
-                                   Rectangle {
-                                       Layout.alignment: Qt.AlignCenter
-                                       Layout.preferredWidth: parent.width
-                                       Layout.preferredHeight: Units.dp(200)
-                                       KpValueChart {
-                                           width:parent.width
-                                           height: parent.height
-                                      }
-                                   }
-                               }
-
-                            }
-
-
-                            Rectangle
-                            {
-                                Layout.alignment: Qt.AlignHCenter
-                                width: 50
-                                height: 50
-                                color : "yellow"
-                            }
-
-                            Rectangle
-                            {
-                                Layout.alignment: Qt.AlignHCenter
-                                width: 50
-                                height: 50
-                                color : "yellow"
-                            }
-                        }
-                    }
-
-            }
-
-            Tab {
-                title: "Weather"
-
-                Rectangle {
-
-                    CurrentWeatherBigCard {
-
                     }
                 }
             }
 
+            onRejected: {
+                // TODO set default colors again but we currently don't know what that is
+            }
+        }
+
+        Tab {
+            title: "Search by City"
+            //iconName: "action/home"
+
+            anchors.leftMargin: 5;
+            anchors.rightMargin: 5;
+            anchors.fill: parent
+
+            ColumnLayout {     // <--- unique child
+                spacing: 30
+
+                anchors.fill: parent
+
+
+                SearchByCity {
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.preferredWidth: Units.dp(500)
+                    anchors.fill: parent
+                }
+
+            }
 
 
         }
 
+        Tab {
+            id: currentRating
+            title: "Your location"
+            anchors.fill: parent
+
+            Overview {
+
+            }
+
+
+        }
+
+        Tab {
+            title: "Weather"
+
+            Rectangle {
+
+                CurrentWeatherBigCard {
+
+                }
+            }
+        }
+
+
 
     }
+
+
 }
 
