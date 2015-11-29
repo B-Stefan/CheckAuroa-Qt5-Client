@@ -63,14 +63,14 @@ ApplicationWindow {
     initialPage: main
 
     MainView {
-        PositionSource {
+        /*PositionSource {
                id: positionSource
                onPositionChanged: { console.log("Position Changed"); }
         
                onUpdateTimeout: {
                    activityText.fadeOut = true
                }
-           }
+           }*/
 
         TabbedPage {
             id: main
@@ -246,9 +246,14 @@ ApplicationWindow {
             }
 
             Tab {
-                title: "Settings"
+                title: "Weather"
 
-                Rectangle { color: Palette.colors.white["200"] }
+                Rectangle {
+
+                    CurrentWeatherBigCard {
+
+                    }
+                }
             }
 
 

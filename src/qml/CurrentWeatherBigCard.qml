@@ -9,10 +9,12 @@ import QtQuick.Controls 1.4 as Controls
 import CheckAurora 1.0
 import QtPositioning 5.3
 
-Item {
-   id:currentRatingCard
+Card {
+   id:currentWeatherCard
+   anchors.centerIn: parent
+   height: Units.dp(100)
+
    property double lat: 0
-   property double lng: 0
 
    state: "loading"
 
@@ -35,7 +37,7 @@ Item {
           active: true
           onPositionChanged: {
                 console.log("Position Changed" + positionSource.position.coordinate.latitude);
-                model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+                weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
           }
 
           onUpdateTimeout: {
@@ -43,15 +45,15 @@ Item {
           }
       }
 
-   CurrentRatingManager {
-       id: model
+   CurrentWeatherManager {
+       id: weatherModel
        onReadyChanged: {
-           currentRatingCard.state = "ready"
+           currentWeatherCard.state = "ready"
            console.log("yeeeah ready")
        }
    }
    Component.onCompleted: {
-       model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+      //  weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {
@@ -60,13 +62,22 @@ Item {
 
    }
 
+   /*
    Text {
        font.pixelSize: 100
        id: currentRatingTxt
        anchors.centerIn: parent
        font.pointSize: 25
-       text: (model.currentRating.value*100)  + "%"
-
+     //  text: (weatherModel.currentWeather.value*100)  + "% ccover"
+     //  text: (weatherModel.currentWeather.icon)
    }
+*/
+   Image {
+       id: currentRatingTxt
+       anchors.centerIn: parent
+       width: 200; height: 200
+       source: "/qml/images/weather/"+weatherModel.currentWeather.icon+".svg"
+   }
+
 
 }

@@ -10,6 +10,7 @@
 #include <QUrlQuery>
 #include <QElapsedTimer>
 #include <QLoggingCategory>
+#include <QtQuick>
 
 
 using  namespace Swagger;
@@ -45,7 +46,7 @@ CurrentRatingManager::~CurrentRatingManager() {
 }
 
 
-void CurrentRatingManager::queryCurrentRating() {
+void CurrentRatingManager::queryCurrentRating(double lat, double lng) {
     //don't update more often then once a minute
     //to keep load on server low
 
@@ -54,18 +55,22 @@ void CurrentRatingManager::queryCurrentRating() {
     connect(ratingsApi, SIGNAL(getCurrentRatingSignal(SWGRating* )),
             this, SLOT(handleCurrentRatingResponse(SWGRating* )));
 
-    ratingsApi->getCurrentRating(60.0,20.9, new QString("now"));
+    ratingsApi->getCurrentRating(lat, lng, new QString("now"));
+    qDebug() << "rating done for: " + QString::number(lat) + ", " + QString::number(lng);
 }
 
 
 void CurrentRatingManager::handleCurrentRatingResponse(SWGRating* rating) {
     d->now.setValue(0.8);
+   // qCDebug(requestsLog) << "got weather network data";
+   // qCDebug(requestsLog) << rating->getValue();
+   // d->now.setValue(rating->getValue());
     d->ready = true;
     emit readyChanged();
 
 }
-void CurrentRatingManager::refreshRating() {
-    this->queryCurrentRating();
+void CurrentRatingManager::refreshRating(double lat, double lng) {
+    this->queryCurrentRating(lat, lng);
 }
 RatingQmlData *CurrentRatingManager::currentRating() const {
     return &(d->now);

@@ -1,8 +1,8 @@
 QT += quick qml
 QT += widgets
-
 QT += svg
 QTPLUGIN += qsvg
+
 
 
 SOURCES += src/main.cpp \
@@ -22,6 +22,9 @@ SOURCES += src/main.cpp \
     src/client/SWGWeatherApi.cpp \
     src/client/SWGWeatherInformation.cpp \
     src/CurrentRatingManager.cpp \
+    src/RatingQmlData.cpp \
+    src/WeatherQmlData.cpp \
+    src/CurrentWeatherManager.cpp
     src/RatingsManager.cpp \
     src/RatingQmlData.cpp
 
@@ -55,5 +58,8 @@ HEADERS += \
     src/client/SWGWeatherApi.h \
     src/client/SWGWeatherInformation.h \
     src/CurrentRatingManager.h \
+    src/RatingQmlData.h \
+    src/WeatherQmlData.h \
+    src/CurrentWeatherManager.h
     src/RatingsManager.h \
     src/RatingQmlData.h
