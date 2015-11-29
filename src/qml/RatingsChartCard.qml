@@ -58,13 +58,10 @@ Item {
            for(var i = 0; i < model.ratings.length; i++){
             var m = model.ratings[i];
             var str = addZero(m.date.getHours()) +  ":" + addZero(m.date.getMinutes())
-            console.log("For start2" + m.date.getDate() + " - ",now)
             if(m.date.getDate() == now.getDate()){
                 str = str + " - Today"
-                console.log("Today")
             }else {
                 str = str + " - Tomorrow"
-                console.log("For tomorrw")
             }
             labels.push(str)
             //predictionValue.pus(m.value);

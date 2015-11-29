@@ -12,8 +12,8 @@
 
 
 #include <QtPositioning/QGeoPositionInfoSource>
-#include <src/client/SWGRating.h>
-#include <src/RatingQmlData.h>
+#include <src/client/SWGKpInformation.h>
+#include <src/KpValueQmlData.h>
 
 
 using  namespace Swagger;
@@ -28,21 +28,10 @@ class KpValueManager : public QObject {
                NOTIFY
                readyChanged)
 
-    Q_PROPERTY(double lat
-                       READ getLat
-                       WRITE setLat
-                       NOTIFY
-                       latChanged)
-    Q_PROPERTY(double  lng
-                       READ getLng
-                       WRITE setLng
-                       NOTIFY
-                       lngChanged)
-
-    Q_PROPERTY(QQmlListProperty<RatingQmlData> ratings
-            READ ratings
+    Q_PROPERTY(QQmlListProperty<KpValueQmlData> kpindex
+            READ kpindex
             NOTIFY
-    ratingsChanged)
+    kpIndexChanged)
 
 public:
     explicit KpValueManager(QObject *parent = 0);
@@ -51,35 +40,24 @@ public:
 
     bool ready() const;
 
-    double getLat() const;
 
-    double getLng() const;
-
-    void setLat(double lat);
-
-    void setLng(double lng);
-
-    QQmlListProperty<RatingQmlData> ratings() const;
+    QQmlListProperty<KpValueQmlData> kpindex() const;
 
 
 public slots:
-            Q_INVOKABLE void refreshRatings();
+            Q_INVOKABLE void refreshKPIndex();
 
 public slots:
 
-    void queryRatings();
+    void querykpindex();
 
-    void handleRatingsResponse(QList<SWGRating*>* ratings);
+    void handleRatingsResponse(QList<SWGKpInformation*>* ratings);
 
     signals:
 
         void readyChanged();
 
-        void ratingsChanged();
-
-        void latChanged();
-
-        void lngChanged();
+        void kpIndexChanged();
 
 
 private:

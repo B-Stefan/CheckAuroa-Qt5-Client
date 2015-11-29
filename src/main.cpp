@@ -38,6 +38,8 @@ typedef QGuiApplication Application;
 #include <QtQuick>
 
 #include "RatingQmlData.h"
+#include "KpValueManager.h"
+#include "KpValueQmlData.h"
 #include "WeatherQmlData.h"
 using namespace Swagger;
 
@@ -45,12 +47,19 @@ int main(int argc, char **argv)
 {
         Application app(argc, argv);
 
+        //Ratings
         qmlRegisterType<RatingQmlData>("CheckAurora", 1, 0, "RatingQmlData");
         qmlRegisterType<CurrentRatingManager>("CheckAurora", 1, 0, "CurrentRatingManager");
+        qmlRegisterType<RatingsManager>("CheckAurora", 1, 0, "RatingsManager");
+
+        //Weather
         qmlRegisterType<WeatherQmlData>("CheckAurora", 1, 0, "WeatherQmlData");
         qmlRegisterType<CurrentWeatherManager>("CheckAurora", 1, 0, "CurrentWeatherManager");
 
-        qmlRegisterType<RatingsManager>("CheckAurora", 1, 0, "RatingsManager");
+
+        //KP Information
+        qmlRegisterType<KpValueManager>("CheckAurora", 1, 0, "KpValueManager");
+        qmlRegisterType<KpValueQmlData>("CheckAurora", 1, 0, "KpValueQmlData");
 
         QQmlApplicationEngine appEngine;
 

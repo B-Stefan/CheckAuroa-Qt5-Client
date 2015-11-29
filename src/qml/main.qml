@@ -200,7 +200,7 @@ ApplicationWindow {
                                    Label {
                                        Layout.alignment: Qt.AlignLeft
                                        Layout.preferredWidth: 40
-                                       text: "Probability next 24 hours"
+                                       text: "Kp Index next 24 hours"
                                        style: "subheading"
                                    }
                                     Label {

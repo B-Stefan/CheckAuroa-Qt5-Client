@@ -18,9 +18,6 @@ Item {
    id:kpValueChart
    anchors.fill: parent
 
-   property double lat: 0
-
-   property double lng: 0
 
    state: "loading"
 
@@ -37,7 +34,7 @@ Item {
        }
    ]
 
-   RatingsManager {
+   KpValueManager {
        id: model
        onReadyChanged: {
 
@@ -48,6 +45,18 @@ Item {
                return i;
            }
 
+            function createLabel(kpValueQmlData){
+                 var str = addZero(kpValueQmlData.date.getHours()) +  ":" + addZero(kpValueQmlData.date.getMinutes())
+
+                 if(kpValueQmlData.date.getDate() == now.getDate()){
+                     str = str + " - Today"
+                 }else if (Math.abs(kpValueQmlData.date.getDate()-now.getDate()) == 1){
+                     str = str + " - Tomorrow"
+                 }else {
+                    str = str   + " - "+ kpValueQmlData.date.getDate() + "." + kpValueQmlData.date.getMonth()  + "." + kpValueQmlData.date.getYear()
+                 }
+                 return str;
+            }
            var labels = [];
            var kpValue  = [];
            var predictionValues =[];
@@ -55,26 +64,38 @@ Item {
            var now = new Date();
 
             console.log("For start")
-           for(var i = 0; i < model.ratings.length; i++){
-            var m = model.ratings[i];
-            var str = addZero(m.date.getHours()) +  ":" + addZero(m.date.getMinutes())
-            console.log("For start2" + m.date.getDate() + " - ",now)
-            if(m.date.getDate() == now.getDate()){
-                str = str + " - Today"
-                console.log("Today")
+            console.log(model.kpindex.length + " length")
+
+
+            var numberOfLegendEntries = 4;
+            var legendSkip = Math.round(model.kpindex.length / numberOfLegendEntries)
+            console.log(legendSkip)
+           for(var i = 0; i < model.kpindex.length; i++){
+            var m = model.kpindex[i];
+            var str = " "
+
+            if(i != 0){
+                if(i % legendSkip == 0){
+                      str = createLabel(m)
+                }
             }else {
-                str = str + " - Tomorrow"
-                console.log("For tomorrw")
+                str = createLabel(m)
             }
+
+
             labels.push(str)
-            //predictionValue.pus(m.value);
-            predictionValues.push(Math.random()*100);
+            predictionValues.push(m.value);
+
 
            }
-           datasets.push({
-                            fillColor: "rgba(0,220,0,0.5)",
-                            strokeColor: "rgba(0,220,0,1)",
-                            data: predictionValues
+           datasets.push({    label: "My Second dataset",
+                              fillColor: "rgba(151,187,205,0.2)",
+                              strokeColor: "rgba(151,187,205,1)",
+                              pointColor: "rgba(151,187,205,1)",
+                              pointStrokeColor: "#fff",
+                              pointHighlightFill: "#fff",
+                              pointHighlightStroke: "rgba(151,187,205,1)",
+                              data: predictionValues
                       })
 
            var data = {
@@ -84,13 +105,17 @@ Item {
 
            kpValueChart.state = "ready"
            kpValueChartChart.chartData = data;
+           kpValueChartChart.chartOptions = {
+            scaleOverride: true,
+            scaleSteps: 7,
+            scaleStepWidth: 1,
+            scaleStartValue: 0,
+           }
        }
 
    }
    Component.onCompleted: {
-        model.lng = 60;
-        model.lng = 25;
-        model.refreshRatings()
+        model.refreshKPIndex()
    }
 
    ProgressCircle {
@@ -107,7 +132,7 @@ Item {
        chartAnimated: true;
        chartAnimationEasing: Easing.OutBounce;
        chartAnimationDuration: 2000;
-       chartType: Charts.ChartType.BAR;
+       chartType: Charts.ChartType.LINE;
      }
 
 

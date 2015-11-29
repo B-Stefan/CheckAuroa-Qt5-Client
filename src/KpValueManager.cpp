@@ -2,7 +2,7 @@
 // Created by Stefan B. on 27.11.15.
 //
 
-#include <src/client/SWGRatingsApi.h>
+#include <src/client/SWGKPIndexApi.h>
 #include "KpValueManager.h"
 #include <QObject>
 
@@ -16,7 +16,8 @@
 #include <QElapsedTimer>
 #include <QLoggingCategory>
 
-#include "src/client/SWGRating.h"
+#include "src/client/SWGKpInformation.h"
+#include "src/KpValueQmlData.h"
 
 using namespace Swagger;
 
@@ -24,11 +25,9 @@ Q_LOGGING_CATEGORY(KpValueManagerLog, "wapp.KpValueManager")
 
 class KpValueManagerPrivate {
 public:
-    double lat;
-    double lng;
-    RatingQmlData now;
-    QList<RatingQmlData *> ratings;
-    QQmlListProperty<RatingQmlData> *fcProp;
+    KpValueQmlData now;
+    QList<KpValueQmlData *> kpindex;
+    QQmlListProperty<KpValueQmlData> *fcProp;
     bool ready;
 
     KpValueManagerPrivate() :
@@ -39,34 +38,34 @@ public:
     }
 };
 
-static void ratingsAppend(QQmlListProperty<RatingQmlData> *prop, RatingQmlData *val) {
+static void kpindexAppend(QQmlListProperty<KpValueQmlData> *prop, KpValueQmlData *val) {
     Q_UNUSED(val);
     Q_UNUSED(prop);
 }
 
-static RatingQmlData *ratingsAt(QQmlListProperty<RatingQmlData> *prop, int index) {
+static KpValueQmlData *kpindexAt(QQmlListProperty<KpValueQmlData> *prop, int index) {
     KpValueManagerPrivate *d = static_cast<KpValueManagerPrivate *>(prop->data);
-    return d->ratings.at(index);
+    return d->kpindex.at(index);
 }
 
-static int ratingsCount(QQmlListProperty<RatingQmlData> *prop) {
+static int kpindexCount(QQmlListProperty<KpValueQmlData> *prop) {
     KpValueManagerPrivate *d = static_cast<KpValueManagerPrivate *>(prop->data);
-    return d->ratings.size();
+    return d->kpindex.size();
 }
 
-static void ratingsClear(QQmlListProperty<RatingQmlData> *prop) {
-    static_cast<KpValueManagerPrivate *>(prop->data)->ratings.clear();
+static void kpindexClear(QQmlListProperty<KpValueQmlData> *prop) {
+    static_cast<KpValueManagerPrivate *>(prop->data)->kpindex.clear();
 }
 
 
 KpValueManager::KpValueManager(QObject *parent) :
         QObject(parent),
         d(new KpValueManagerPrivate) {
-    d->fcProp = new QQmlListProperty<RatingQmlData>(this, d,
-                                                    ratingsAppend,
-                                                    ratingsCount,
-                                                    ratingsAt,
-                                                    ratingsClear);
+    d->fcProp = new QQmlListProperty<KpValueQmlData>(this, d,
+                                                    kpindexAppend,
+                                                    kpindexCount,
+                                                    kpindexAt,
+                                                    kpindexClear);
     
 
 }
@@ -76,66 +75,51 @@ KpValueManager::~KpValueManager() {
 }
 
 
-void KpValueManager::queryRatings(){
+void KpValueManager::querykpindex(){
     //don't update more often then once a minute
     //to keep load on server low
 
-    Swagger::SWGRatingsApi * ratingsApi = new Swagger::SWGRatingsApi("", "http://check-aurora-api.herokuapp.com");
+    Swagger::SWGKPIndexApi * kpindexApi = new Swagger::SWGKPIndexApi("", "http://check-aurora-api.herokuapp.com");
 
-    connect(ratingsApi, SIGNAL(getRatingSignal(QList<SWGRating*>* )),
-            this, SLOT(handleRatingsResponse(QList<SWGRating*>* )));
+    connect(kpindexApi, SIGNAL(getKpIndexSignal(QList<SWGKpInformation*>* )),
+            this, SLOT(handleRatingsResponse(QList<SWGKpInformation*>* )));
 
-    ratingsApi->getRating(60.0,20.9, new QString("now"));
+    kpindexApi->getKpIndex(new QString("now"));
 }
 
 
-void KpValueManager::handleRatingsResponse(QList<SWGRating*>* ratings) {
+void KpValueManager::handleRatingsResponse(QList<SWGKpInformation*>* kpindex) {
 
-    qCDebug(KpValueManagerLog) << "got weather network data";
+    qCDebug(KpValueManagerLog) << "got kp information data ";
 
     d->now.setValue(0.8);
     d->ready = true;
 
-    foreach (RatingQmlData *inf, d->ratings)
+    foreach (KpValueQmlData *inf, d->kpindex)
             delete inf;
-    d->ratings.clear();
+    d->kpindex.clear();
 
 
-
-    foreach(Swagger::SWGRating * swgRating, ratings->toVector()){
-            RatingQmlData * ratingQmlData = new RatingQmlData(this);
+    foreach(Swagger::SWGKpInformation * swgRating, kpindex->toVector()){
+            KpValueQmlData * ratingQmlData = new KpValueQmlData(this);
 
             ratingQmlData->setDate(*swgRating->getDate());
-            ratingQmlData->setValue(swgRating->getValue());
+            ratingQmlData->setValue(swgRating->getKpValue());
 
-            d->ratings.append(ratingQmlData);
+            d->kpindex.append(ratingQmlData);
         }
 
     emit readyChanged();
 
 }
-void KpValueManager::refreshRatings() {
-    this->queryRatings();
+void KpValueManager::refreshKPIndex() {
+    this->querykpindex();
 }
 
-QQmlListProperty<RatingQmlData> KpValueManager::ratings() const {
+QQmlListProperty<KpValueQmlData> KpValueManager::kpindex() const {
     return *(d->fcProp);
 }
 
 bool KpValueManager::ready() const {
     return d->ready;
-}
-
-double KpValueManager::getLat() const {
-    return d->lat;
-}
-
-double KpValueManager::getLng() const {
-    return d->lng;
-}
-void KpValueManager::setLat(double lat) {
-    d->lat = lat;
-}
-void KpValueManager::setLng(double lng) {
-    d->lng = lng;
 }
