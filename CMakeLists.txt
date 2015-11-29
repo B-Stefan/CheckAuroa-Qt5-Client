@@ -39,8 +39,6 @@ set(SOURCE_FILES
         src/CurrentWeatherManager.cpp
         src/KpValueManager.cpp
         src/KpValueManager.h
-        src/KPValueQMLData.cpp
-        src/KPValueQMLData.h
         src/weatherqmldata.h
         src/weatherqmldata.cpp
         src/qml/main.qml
