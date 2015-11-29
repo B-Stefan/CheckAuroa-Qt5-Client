@@ -14,7 +14,7 @@
 
 using  namespace Swagger;
 
-Q_LOGGING_CATEGORY(requestsLog, "wapp.requests")
+Q_LOGGING_CATEGORY(requestsLog, "wapp.CurrentRatingManager")
 
 class AppModelPrivate {
 public:
@@ -22,8 +22,7 @@ public:
     RatingQmlData now;
     QList<RatingQmlData *> forecast;
     QQmlListProperty<RatingQmlData> *fcProp;
-    QSignalMapper *weatherReplyMapper,
-                   *forecastReplyMapper;
+
     bool ready;
 
     AppModelPrivate() :
@@ -33,36 +32,10 @@ public:
     }
 };
 
-static void forecastAppend(QQmlListProperty<RatingQmlData> *prop, RatingQmlData *val) {
-    Q_UNUSED(val);
-    Q_UNUSED(prop);
-}
-
-static RatingQmlData *forecastAt(QQmlListProperty<RatingQmlData> *prop, int index) {
-    AppModelPrivate *d = static_cast<AppModelPrivate *>(prop->data);
-    return d->forecast.at(index);
-}
-
-static int forecastCount(QQmlListProperty<RatingQmlData> *prop) {
-    AppModelPrivate *d = static_cast<AppModelPrivate *>(prop->data);
-    return d->forecast.size();
-}
-
-static void forecastClear(QQmlListProperty<RatingQmlData> *prop) {
-    static_cast<AppModelPrivate *>(prop->data)->forecast.clear();
-}
 
 CurrentRatingManager::CurrentRatingManager(QObject *parent) :
         QObject(parent),
         d(new AppModelPrivate) {
-    d->fcProp = new QQmlListProperty<RatingQmlData>(this, d,
-                                                  forecastAppend,
-                                                  forecastCount,
-                                                  forecastAt,
-                                                  forecastClear);
-
-    d->weatherReplyMapper = new QSignalMapper(this);
-    d->forecastReplyMapper = new QSignalMapper(this);
 
 
 }
@@ -86,8 +59,6 @@ void CurrentRatingManager::queryCurrentRating() {
 
 
 void CurrentRatingManager::handleCurrentRatingResponse(SWGRating* rating) {
-    qCDebug(requestsLog) << "got weather network data";
-    qCDebug(requestsLog) << rating->getValue();
     d->now.setValue(0.8);
     d->ready = true;
     emit readyChanged();
