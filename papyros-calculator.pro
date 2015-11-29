@@ -21,13 +21,13 @@ SOURCES += src/main.cpp \
     src/client/SWGRatingsApi.cpp \
     src/client/SWGWeatherApi.cpp \
     src/client/SWGWeatherInformation.cpp \
-    src/CurrentRatingManager.cpp \
-    src/RatingQmlData.cpp \
-    src/WeatherQmlData.cpp \
-    src/CurrentWeatherManager.cpp \
-    src/RatingsManager.cpp \
-    src/KpValueQmlData.cpp \
-    src/KpValueManager.cpp
+    src/qmlData/RatingQmlData.cpp \
+    src/qmlData/WeatherQmlData.cpp \
+    src/qmlData/KpValueQmlData.cpp \
+    src/qmlManager/CurrentWeatherManager.cpp \
+    src/qmlManager/RatingsManager.cpp \
+    src/qmlManager/CurrentRatingManager.cpp \
+    src/qmlManager/KpValueManager.cpp
 
 OTHER_FILES = README.md
 
@@ -37,8 +37,8 @@ CONFIG += staticlib
 
 target.path = /usr/bin
 
-RC_ICONS += icons/papyros-calculator.ico
-ICON += icons/papyros-calculator.icns
+RC_ICONS += icons/check-aurora.ico
+ICON += icons/check-aurora.icns
 
 HEADERS += \
     src/client/SWGError.h \
@@ -58,10 +58,10 @@ HEADERS += \
     src/client/SWGRatingsApi.h \
     src/client/SWGWeatherApi.h \
     src/client/SWGWeatherInformation.h \
-    src/CurrentRatingManager.h \
-    src/RatingQmlData.h \
-    src/WeatherQmlData.h \
-    src/CurrentWeatherManager.h \
-    src/RatingsManager.h \
-    src/KpValueQmlData.h \
-    src/KpValueManager.h \
+    src/qmlData/RatingQmlData.h \
+    src/qmlData/WeatherQmlData.h \
+    src/qmlData/KpValueQmlData.h \
+    src/qmlManager/CurrentWeatherManager.h \
+    src/qmlManager/RatingsManager.h \
+    src/qmlManager/CurrentRatingManager.h \
+    src/qmlManager/KpValueManager.h \

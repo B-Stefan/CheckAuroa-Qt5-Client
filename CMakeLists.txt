@@ -27,22 +27,23 @@ set(MACOSX_BUNDLE_ICON_FILE AppIcon.icns)
 set(SOURCE_FILES
         ${SOURCE_FILES}
         ./src/main.cpp
-        src/Facade.cpp
-        src/Facade.h
-        src/CurrentRatingManager.cpp
-        src/CurrentRatingManager.h
-        src/RatingsManager.cpp
-        src/RatingsManager.h
-        src/RatingQmlData.h
-        src/RatingQmlData.cpp
-        src/CurrentWeatherManager.h
-        src/CurrentWeatherManager.cpp
-        src/KpValueManager.cpp
-        src/KpValueManager.h
-        src/KpValueQmlData.h
-        src/KpValueQmlData.cpp
-        src/weatherqmldata.h
-        src/weatherqmldata.cpp
+        src/qmlManager/CurrentRatingManager.cpp
+        src/qmlManager/CurrentRatingManager.h
+        src/qmlManager/RatingsManager.cpp
+        src/qmlManager/RatingsManager.h
+        src/qmlManager/CurrentWeatherManager.h
+        src/qmlManager/CurrentWeatherManager.cpp
+        src/qmlManager/KpValueManager.cpp
+        src/qmlManager/KpValueManager.h
+
+        src/qmlData/RatingQmlData.h
+        src/qmlData/RatingQmlData.cpp
+        src/qmlData/KpValueQmlData.h
+        src/qmlData/KpValueQmlData.cpp
+        src/qmlData/weatherqmldata.h
+        src/qmlData/weatherqmldata.cpp
+
+
         src/qml/main.qml
 )
 
