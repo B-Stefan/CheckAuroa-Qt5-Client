@@ -88,22 +88,25 @@ void CurrentWeatherManager::queryCurrentWeather(double lat, double lng) {
 
 
 void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* weather) {
-    qCDebug(requestsLogWeather) << "got weather network data";
-    qCDebug(requestsLogWeather) << weather->getIcon();
-    //d->now.setValue(weather->getCloudCover());
-   // QString* tmp = weather->getIcon();
-    //qDebug() << "&: " + &tmp;
-    //qDebug() << *tmp;
-    // d->now.setValue(weather->getCloudCover());
-    // setting the Icon will crash the Application for an unknown reason
-  //  d->now.setIcon(*weather->getIcon());
-   // d->now.setValue(weather->getCloudCover());
-    QString * hans = new QString(weather->getIcon()->toLatin1());
 
-    //qDebug() << "Ausgabe: " +  d->now.getIcon();
+  //  qCDebug(requestsLog) << "got weather network data";
+  //  qCDebug(requestsLog) << weather->getIcon();
+    QString * weatherIcon = new QString("clear-day");
+    QString * weatherSummary = new QString("loading..");
 
-    d->now.setIcon(* hans);
 
+    if(weather->getIcon()!=0){
+       *weatherIcon = weather->getIcon()->toLatin1();
+    }
+
+    if(weather->getSummary()!=0){
+       *weatherSummary = weather->getSummary()->toLatin1();
+    }
+    d->now.setValue(weather->getCloudCover());
+    d->now.setIcon(* weatherIcon);
+    d->now.setSummary(* weatherSummary);
+    d->now.setSunriseTime(weather->getSunriseTime());
+    d->now.setSunsetTime(weather->getSunsetTime());
     d->ready = true;
     emit readyChanged();
 

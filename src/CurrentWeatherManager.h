@@ -41,7 +41,6 @@ public:
     QQmlListProperty<WeatherQmlData> weather() const;
 
     WeatherQmlData  *currentWeather()   const;
-//  RatingQmlData   *currentRating()    const;
 
 public slots:
     Q_INVOKABLE void refreshWeather(double lat, double lng);
