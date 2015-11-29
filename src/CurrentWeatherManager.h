@@ -14,9 +14,9 @@ using namespace Swagger;
 
 class CurrentWeatherManagerPrivate;
 
-class currentweathermanager : public QObject {
+class CurrentWeatherManager : public QObject {
 
-    Q_OBJECT
+Q_OBJECT
     Q_PROPERTY(bool ready
                        READ ready
                        NOTIFY
@@ -32,9 +32,9 @@ class currentweathermanager : public QObject {
                        weatherChanged)
 
 public:
-    explicit currentweathermanager(QObject *parent = 0);
+    explicit CurrentWeatherManager(QObject *parent = 0);
 
-    ~currentweathermanager();
+    ~CurrentWeatherManager();
 
     bool ready() const;
 

@@ -35,8 +35,8 @@ set(SOURCE_FILES
         src/RatingsManager.h
         src/RatingQmlData.h
         src/RatingQmlData.cpp
-        src/currentweathermanager.h
-        src/currentweathermanager.cpp
+        src/CurrentWeatherManager.h
+        src/CurrentWeatherManager.cpp
         src/weatherqmldata.h
         src/weatherqmldata.cpp
         src/qml/main.qml
