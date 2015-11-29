@@ -88,28 +88,12 @@ void CurrentWeatherManager::queryCurrentWeather(double lat, double lng) {
 
 
 void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* weather) {
-<<<<<<< HEAD
+
   //  qCDebug(requestsLog) << "got weather network data";
   //  qCDebug(requestsLog) << weather->getIcon();
     QString * weatherIcon = new QString("clear-day");
     QString * weatherSummary = new QString("loading..");
-=======
-    qCDebug(requestsLogWeather) << "got weather network data";
-    qCDebug(requestsLogWeather) << weather->getIcon();
-    //d->now.setValue(weather->getCloudCover());
-   // QString* tmp = weather->getIcon();
-    //qDebug() << "&: " + &tmp;
-    //qDebug() << *tmp;
-    // d->now.setValue(weather->getCloudCover());
-    // setting the Icon will crash the Application for an unknown reason
-  //  d->now.setIcon(*weather->getIcon());
-   // d->now.setValue(weather->getCloudCover());
-    QString * hans = new QString(weather->getIcon()->toLatin1());
 
-    //qDebug() << "Ausgabe: " +  d->now.getIcon();
-
-    d->now.setIcon(* hans);
->>>>>>> origin/CalcRebuild
 
     if(weather->getIcon()!=0){
        *weatherIcon = weather->getIcon()->toLatin1();
