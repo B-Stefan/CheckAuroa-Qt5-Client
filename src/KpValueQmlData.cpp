@@ -2,7 +2,7 @@
 // Created by Stefan B. on 27.11.15.
 //
 
-#include "RatingQmlData.h"
+#include "KpValueQmlData.h"
 #include <QSignalMapper>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -14,34 +14,34 @@
 #include <QLoggingCategory>
 #include <QtQuick>
 
-RatingQmlData::RatingQmlData(QObject *parent) :
+KpValueQmlData::KpValueQmlData(QObject *parent) :
         QObject(parent) {
 }
 
-RatingQmlData::RatingQmlData(const RatingQmlData &other) :
+KpValueQmlData::KpValueQmlData(const KpValueQmlData &other) :
         QObject(0),
         m_date(other.m_date),
         m_value(other.m_value){
 }
-RatingQmlData::RatingQmlData(Swagger::SWGRating * other) :
+KpValueQmlData::KpValueQmlData(Swagger::SWGRating * other) :
         QObject(0){
 
 }
 
 
-QDateTime RatingQmlData::getDate() {
+QDateTime KpValueQmlData::getDate() {
     return  this->m_date;
 }
-double RatingQmlData::getValue(){
+double KpValueQmlData::getValue(){
     return this->m_value;
 }
 
-void RatingQmlData::setDate(QDateTime &dateTime) {
+void KpValueQmlData::setDate(QDateTime &dateTime) {
     m_date = dateTime;
     emit dataChanged();
 }
 
-void RatingQmlData::setValue(double val) {
+void KpValueQmlData::setValue(double val) {
     m_value = val;
     emit dataChanged();
 }

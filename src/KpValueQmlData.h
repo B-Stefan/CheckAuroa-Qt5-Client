@@ -1,5 +1,5 @@
-#ifndef QT_CLIENT_RATINGQMLDATA_H
-#define QT_CLIENT_RATINGQMLDATA_H
+#ifndef QT_CLIENT_KPVALUEQMLDATA_H
+#define QT_CLIENT_KPVALUEQMLDATA_H
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
@@ -7,7 +7,7 @@
 #include <QtQml/QQmlListProperty>
 #include "src/client/SWGRating.h"
 
-class RatingQmlData : public QObject {
+class KpValueQmlData : public QObject {
     Q_OBJECT
             Q_PROPERTY(QDateTime date
                        READ getDate
@@ -22,10 +22,10 @@ class RatingQmlData : public QObject {
 
 
 public:
-    explicit RatingQmlData(QObject *parent = 0);
+    explicit KpValueQmlData(QObject *parent = 0);
 
-    RatingQmlData(const RatingQmlData &other);
-    RatingQmlData(Swagger::SWGRating *rating);
+    KpValueQmlData(const KpValueQmlData &other);
+    KpValueQmlData(Swagger::SWGRating *rating);
 
     void setValue(double val);
 
@@ -46,7 +46,7 @@ private:
 
 };
 
-Q_DECLARE_METATYPE(RatingQmlData)
+Q_DECLARE_METATYPE(KpValueQmlData)
 
 
-#endif //QT_CLIENT_RATINGQMLDATA_H
+#endif //QT_CLIENT_KPVALUEQMLDATA_H

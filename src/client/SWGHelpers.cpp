@@ -33,6 +33,37 @@ setValue(void* value, QJsonValue obj, QString type, QString complexType) {
         double *val = static_cast<double*>(value);
         *val = obj.toDouble();
     }
+    else if (QStringLiteral("QDateTime").compare(type) == 0) {
+        QDateTime **val = static_cast<QDateTime**>(value);
+
+        if(val != NULL) {
+            if(!obj.isNull()) {
+                // create a new value and return
+                delete *val;
+
+                QDateTime timeConvertor;
+                QString customDateString = obj.toString();
+
+                QString dateTime = customDateString.left(23).trimmed();
+                int timezoneOffset = customDateString.right(5).left(3).remove(":").remove("+").toInt();
+                timeConvertor = QDateTime::fromString(dateTime, "yyyy-MM-ddTHH:mm:ss.zzz");
+
+                QDateTime * newDatetime = new QDateTime(timeConvertor.date(),timeConvertor.time());
+                newDatetime->setTimeSpec(Qt::OffsetFromUTC);
+                newDatetime->setUtcOffset(timezoneOffset * 3600);
+                *val =newDatetime;
+                return;
+            }
+            else {
+                // set target to NULL
+                delete *val;
+                *val = NULL;
+            }
+        }
+        else {
+            qDebug() << "Can't set value because the target pointer is NULL";
+        }
+    }
     else if (QStringLiteral("QString").compare(type) == 0) {
         QString **val = static_cast<QString**>(value);
 
@@ -132,6 +163,13 @@ toJsonValue(QString name, void* value, QJsonObject* output, QString type) {
                 }
             }
         }
+    }
+    else if(QStringLiteral("QDateTime").compare(type) == 0) {
+
+        QDateTime* dateTime = static_cast<QDateTime*>(value);
+
+        QString str = dateTime->toString(Qt::ISODate);
+        output->insert(name, QJsonValue(str));
     }
     else if(QStringLiteral("QString").compare(type) == 0) {
         QString* str = static_cast<QString*>(value);

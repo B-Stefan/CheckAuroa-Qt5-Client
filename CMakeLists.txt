@@ -31,8 +31,18 @@ set(SOURCE_FILES
         src/Facade.h
         src/CurrentRatingManager.cpp
         src/CurrentRatingManager.h
+        src/RatingsManager.cpp
+        src/RatingsManager.h
         src/RatingQmlData.h
         src/RatingQmlData.cpp
+        src/CurrentWeatherManager.h
+        src/CurrentWeatherManager.cpp
+        src/KpValueManager.cpp
+        src/KpValueManager.h
+        src/KpValueQmlData.h
+        src/KpValueQmlData.cpp
+        src/weatherqmldata.h
+        src/weatherqmldata.cpp
         src/qml/main.qml
 )
 
@@ -87,5 +97,8 @@ add_executable(${PROJECT} MACOSX_BUNDLE
                 ${RESOURCE_ADDED})
 
 qt5_use_modules(${PROJECT} Widgets)
+qt5_use_modules(${PROJECT} Core)
+qt5_use_modules(${PROJECT} WebKitWidgets)
 qt5_use_modules(${PROJECT} Qml)
+qt5_use_modules(${PROJECT} Quick)
 qt5_use_modules(${PROJECT} Positioning)

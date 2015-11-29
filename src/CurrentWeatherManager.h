@@ -5,7 +5,6 @@
 #include <QtCore/QString>
 #include <QtNetwork/QNetworkReply>
 #include <QtQml/QQmlListProperty>
-#include <QtQuick>
 
 #include <QtPositioning/QGeoPositionInfoSource>
 #include <src/client/SWGWeatherInformation.h>
@@ -17,7 +16,7 @@ class CurrentWeatherManagerPrivate;
 
 class CurrentWeatherManager : public QObject {
 
-    Q_OBJECT
+Q_OBJECT
     Q_PROPERTY(bool ready
                        READ ready
                        NOTIFY
