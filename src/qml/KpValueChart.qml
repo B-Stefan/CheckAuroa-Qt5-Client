@@ -74,10 +74,12 @@ Item {
             var m = model.kpindex[i];
             var str = " "
 
-            if(i != 0){
+            if(i != 0 && i !== model.kpindex.length-1){
                 if(i % legendSkip == 0){
                       str = createLabel(m)
                 }
+            }else if(i == model.kpindex.length-1){
+                str =  createLabel(m)
             }else {
                 str = createLabel(m)
             }
