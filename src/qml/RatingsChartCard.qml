@@ -8,6 +8,8 @@ import Qt.labs.settings 1.0
 import QtQuick.Controls 1.4 as Controls
 import CheckAurora 1.0
 
+import QtPositioning 5.3
+
 
 import "charts/QChart.js" as Charts
 
@@ -37,6 +39,31 @@ Item {
        }
    ]
 
+
+   Component.onCompleted: {
+        var forbiddenPlatforms = ["osx" , "windows", "wince", "winrt"];
+        if( forbiddenPlatforms.indexOf(Qt.platform.os) != -1 ){
+            ratingsChartCard.lat = 60;
+            ratingsChartCard.lng = 25;
+        }
+        if(ratingsChartCard.lat + ratingsChartCard.lng != 0){
+            model.refreshRatings(ratingsChartCard.lat, ratingsChartCard.lng)
+        }
+   }
+   PositionSource {
+          id: positionSource
+          updateInterval: 36000
+          active: (ratingsChartCard.lat + ratingsChartCard.lng) != 0
+          onPositionChanged: {
+                      ratingsChartCard.state = "loading"
+                      console.log("Position Changed" + positionSource.position.coordinate.latitude);
+                      model.refreshRatings(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+                }
+
+         onUpdateTimeout: {
+            console.log("TIMEOUT")
+         }
+   }
    RatingsManager {
        id: model
        onReadyChanged: {
@@ -83,11 +110,6 @@ Item {
            ratingsChartTxt.chartData = data;
        }
 
-   }
-   Component.onCompleted: {
-        model.lng = 60;
-        model.lng = 25;
-        model.refreshRatings()
    }
 
    ProgressCircle {

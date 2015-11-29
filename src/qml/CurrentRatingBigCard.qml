@@ -29,11 +29,22 @@ Item {
        }
    ]
 
+  Component.onCompleted: {
+          var forbiddenPlatforms = ["osx" , "windows", "wince", "winrt"];
+          if( forbiddenPlatforms.indexOf(Qt.platform.os) != -1 ){
+              currentRatingCard.lat = 60;
+              currentRatingCard.lng = 25;
+          }
+          if(currentRatingCard.lat + currentRatingCard.lng != 0){
+              model.refreshRating(currentRatingCard.lat, currentRatingCard.lng)
+          }
+     }
    PositionSource {
           id: positionSource
           updateInterval: 36000
-          active: true
+          active: (currentRatingCard.lat + currentRatingCard.lng) != 0
           onPositionChanged: {
+                currentRatingCard.state = "loading"
                 console.log("Position Changed" + positionSource.position.coordinate.latitude);
                 model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
           }
@@ -47,11 +58,7 @@ Item {
        id: model
        onReadyChanged: {
            currentRatingCard.state = "ready"
-           console.log("yeeeah ready")
        }
-   }
-   Component.onCompleted: {
-       model.refreshRating(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {
