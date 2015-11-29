@@ -73,7 +73,7 @@ Controls.ScrollView {
                    Layout.preferredWidth: parent.width
                    Layout.preferredHeight: Units.dp(100)
                    wrapMode: Text.WordWrap
-                   text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor  invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                   text: "The chart below represents the possibilty to see the Aurora Borealis at your location in the next 24 hours. The data is provided by different forecast services to give you the most accurate prediction. Keep in mind that even though we are trying our best to be on point with our prediction, there is no guarantee."
                }
 
                Rectangle {
@@ -109,7 +109,7 @@ Controls.ScrollView {
                    Layout.preferredWidth: parent.width
                    Layout.preferredHeight: Units.dp(100)
                    wrapMode: Text.WordWrap
-                   text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor  invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                   text: "The Kp-Index represents the overall sun-activity and therefore the intensity of solar flares. A high Kp-Number means, that the Aurora can be seen further south from the North-pole. The Kp-Index scale varies between a minimum of 0 and a maximum of 9."
                }
 
                Rectangle {
@@ -124,24 +124,7 @@ Controls.ScrollView {
            }
 
         }
-
-
-        Rectangle
-        {
-            Layout.alignment: Qt.AlignHCenter
-            width: 50
-            height: 50
-            color : "yellow"
-        }
-
-        Rectangle
-        {
-            Layout.alignment: Qt.AlignHCenter
-            width: 50
-            height: 50
-            color : "yellow"
-        }
     }
-    }
+}
 
 
