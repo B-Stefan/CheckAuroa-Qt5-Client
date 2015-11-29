@@ -12,11 +12,11 @@ import QtPositioning 5.3
 Card {
    id:currentWeatherCard
    anchors.centerIn: parent
-   height: Units.dp(100)
-
-   property double lat: 0
+   height: Units.dp(220)
 
    state: "loading"
+  // var sunset = "";
+
 
    states: [
        State {
@@ -37,7 +37,13 @@ Card {
           active: true
           onPositionChanged: {
                 console.log("Position Changed" + positionSource.position.coordinate.latitude);
-                weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+                weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude);
+                var sunriseDate = new Date(weatherModel.currentWeather.sunsetTime*1000);
+                var sunsetDate = new Date(weatherModel.currentWeather.sunsetTime*1000);
+                console.log(sunriseDate);
+              //  var sunrise =   sunriseDate.getHours() + ':' + sunriseDate.getMinutes().substr(-2);
+               // var sunset =    sunriseDate.getHours() + ':' + sunriseDate.getMinutes().substr(-2);
+                console.log(sunrise);
           }
 
           onUpdateTimeout: {
@@ -53,7 +59,7 @@ Card {
        }
    }
    Component.onCompleted: {
-      //  weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+        weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
    }
 
    ProgressCircle {
@@ -62,22 +68,56 @@ Card {
 
    }
 
-   /*
-   Text {
-       font.pixelSize: 100
-       id: currentRatingTxt
-       anchors.centerIn: parent
-       font.pointSize: 25
-     //  text: (weatherModel.currentWeather.value*100)  + "% ccover"
-     //  text: (weatherModel.currentWeather.icon)
-   }
-*/
    Image {
        id: currentRatingTxt
-       anchors.centerIn: parent
+       anchors.left: parent.left
        width: 200; height: 200
        source: "/qml/images/weather/"+weatherModel.currentWeather.icon+".svg"
    }
 
+   Text{
+       anchors.left: parent.left
+       anchors.leftMargin: 200
+       anchors.top: parent.top
+       anchors.topMargin: 50
+       font.pointSize: 25
+       text: weatherModel.currentWeather.summary
+   }
+
+   Text{
+       anchors.left: parent.left
+       anchors.leftMargin: 200
+       anchors.top: parent.top
+       anchors.topMargin: 160
+       font.pointSize: 25
+       text: ("0" + new Date(weatherModel.currentWeather.sunriseTime*1000).getHours()).toLocaleString().slice(-2) + ":" + ("0" + new Date(weatherModel.currentWeather.sunriseTime*1000).getMinutes().toLocaleString()).slice(-2);
+   }
+
+   Text{
+       anchors.left: parent.left
+       anchors.leftMargin: 200
+       anchors.top: parent.top
+       anchors.topMargin: 270
+       font.pointSize: 25
+       text: ("0" + new Date(weatherModel.currentWeather.sunsetTime*1000).getHours()).toLocaleString().slice(-2) + ":" + ("0" + new Date(weatherModel.currentWeather.sunsetTime*1000).getMinutes().toLocaleString()).slice(-2);
+   }
+
+   Image {
+     //  id: currentRatingTxt
+       anchors.top: parent.top
+       anchors.topMargin: 110
+       anchors.left: parent.left
+       width: 200; height: 200
+       source: "/qml/images/weather/Sunrise.svg"
+   }
+
+   Image {
+     //  id: currentRatingTxt
+       anchors.top: parent.top
+       anchors.topMargin: 220
+       anchors.left: parent.left
+       width: 200; height: 200
+       source: "/qml/images/weather/Sunset.svg"
+   }
 
 }

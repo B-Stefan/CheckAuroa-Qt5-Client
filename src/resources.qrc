@@ -16,5 +16,7 @@
         <file>qml/images/weather/snow.svg</file>
         <file>qml/images/weather/thunderstorm.svg</file>
         <file>qml/images/weather/wind.svg</file>
+        <file>qml/images/weather/Sunrise.svg</file>
+        <file>qml/images/weather/Sunset.svg</file>
     </qresource>
 </RCC>

@@ -104,6 +104,18 @@ void CurrentWeatherManager::handleCurrentWeatherResponse(SWGWeatherInformation* 
 
     d->now.setIcon(* hans);
 
+    if(weather->getIcon()!=0){
+       *weatherIcon = weather->getIcon()->toLatin1();
+    }
+
+    if(weather->getSummary()!=0){
+       *weatherSummary = weather->getSummary()->toLatin1();
+    }
+    d->now.setValue(weather->getCloudCover());
+    d->now.setIcon(* weatherIcon);
+    d->now.setSummary(* weatherSummary);
+    d->now.setSunriseTime(weather->getSunriseTime());
+    d->now.setSunsetTime(weather->getSunsetTime());
     d->ready = true;
     emit readyChanged();
 
