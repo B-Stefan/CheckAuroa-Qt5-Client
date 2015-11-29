@@ -9,12 +9,10 @@ import QtQuick.Controls 1.4 as Controls
 import CheckAurora 1.0
 import QtPositioning 5.3
 
-Card {
+Item {
    id:currentRatingCard
-   anchors.centerIn: parent
-   height: Units.dp(100)
-
    property double lat: 0
+   property double lng: 0
 
    state: "loading"
 

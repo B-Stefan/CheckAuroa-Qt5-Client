@@ -2,7 +2,10 @@
     <qresource prefix="/">
         <file>qml/main.qml</file>
         <file>qml/CurrentRatingBigCard.qml</file>
+        <file>qml/RatingsChartCard.qml</file>
+        <file>qml/KpValueChart.qml</file>
         <file>qml/SubPage.qml</file>
-        <file>qml/CalculatorButton.qml</file>
+        <file>qml/charts/QChart.js</file>
+        <file>qml/charts/QChart.qml</file>
     </qresource>
 </RCC>

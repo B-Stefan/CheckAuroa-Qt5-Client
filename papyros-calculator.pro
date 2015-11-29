@@ -22,6 +22,7 @@ SOURCES += src/main.cpp \
     src/client/SWGWeatherApi.cpp \
     src/client/SWGWeatherInformation.cpp \
     src/CurrentRatingManager.cpp \
+    src/RatingsManager.cpp \
     src/RatingQmlData.cpp
 
 OTHER_FILES = README.md
@@ -54,4 +55,5 @@ HEADERS += \
     src/client/SWGWeatherApi.h \
     src/client/SWGWeatherInformation.h \
     src/CurrentRatingManager.h \
+    src/RatingsManager.h \
     src/RatingQmlData.h

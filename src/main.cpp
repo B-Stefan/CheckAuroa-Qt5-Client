@@ -31,6 +31,7 @@ typedef QGuiApplication Application;
 #include <QCoreApplication>
 #include <QObject>
 #include "CurrentRatingManager.h"
+#include "RatingsManager.h"
 #include <QQmlComponent>
 #include <QQmlEngine>
 
@@ -43,6 +44,7 @@ int main(int argc, char **argv)
 
         qmlRegisterType<RatingQmlData>("CheckAurora", 1, 0, "RatingQmlData");
         qmlRegisterType<CurrentRatingManager>("CheckAurora", 1, 0, "CurrentRatingManager");
+        qmlRegisterType<RatingsManager>("CheckAurora", 1, 0, "RatingsManager");
 
         QQmlApplicationEngine appEngine;
 
