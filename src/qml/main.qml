@@ -100,20 +100,6 @@ ApplicationWindow {
                 anchors.fill: parent
                 Controls.ScrollView
                     {
-                        onVisibleChanged: {
-                            if (!this.activeFocus){
-
-                                if (positionSource.supportedPositioningMethods ===
-                                        PositionSource.NoPositioningMethods) {
-                                    positionSource.nmeaSource = "nmealog.txt";
-                                    sourceText.text = "(filesource): " + printableMethod(positionSource.supportedPositioningMethods);
-                                }
-                                positionSource.update();
-                                var latitude = positionSource.position.coordinate.latitude
-                                var longitude = positionSource.position.coordinate.longitude
-                                console.log(latitude,longitude)
-                            }
-                        }
                         anchors.fill: parent
 
                         ColumnLayout {     // <--- unique child
@@ -172,7 +158,7 @@ ApplicationWindow {
                                        Layout.preferredWidth: parent.width
                                        Layout.preferredHeight: Units.dp(100)
                                        wrapMode: Text.WordWrap
-                                       text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor  invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                                       text: "The chart below represents the possibilty to see the Aurora Borealis at your location in the next 24 hours. The data is provided by different forecast services to give you the most accurate prediction. Keep in mind that even though we are trying our best to be on point with our prediction, there is no guarantee."
                                    }
 
                                    Rectangle {
@@ -208,7 +194,7 @@ ApplicationWindow {
                                        Layout.preferredWidth: parent.width
                                        Layout.preferredHeight: Units.dp(100)
                                        wrapMode: Text.WordWrap
-                                       text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor  invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                                       text: "The Kp-Index represents the overall sun-activity and therefore the intensity of solar flares. A high Kp-Number means, that the Aurora can be seen further south from the North-pole. The Kp-Index scale varies between a minimum of 0 and a maximum of 9."
                                    }
 
                                    Rectangle {
@@ -246,14 +232,67 @@ ApplicationWindow {
             }
 
             Tab {
+                id: currentWeather
                 title: "Weather"
+                anchors.fill: parent
+                Controls.ScrollView
+                    {
+                        anchors.fill: parent
 
-                Rectangle {
+                        ColumnLayout {     // <--- unique child
+                            spacing: 30
 
-                    CurrentWeatherBigCard {
+                            width: calculator.width      // ensure correct width
+                            height: children.height     // ensure correct height
 
+                            Card {
+                                Layout.alignment: Qt.AlignHCenter
+                                Layout.preferredWidth: Units.dp(400)
+                                Layout.preferredHeight: Units.dp(600)
+                                ColumnLayout{
+                                   spacing: Units.dp(10)
+                                   anchors.centerIn: parent
+                                   width: parent.width * 0.8
+                                   height: parent.height * 0.8
+                                   Label {
+                                       Layout.alignment: Qt.AlignLeft
+                                       Layout.preferredWidth: 40
+                                       text: "Live Weather data"
+                                       style: "subheading"
+                                   }
+
+                                   Rectangle {
+                                       Layout.alignment: Qt.AlignCenter
+                                       Layout.preferredWidth: parent.width
+                                       Layout.preferredHeight: parent.height
+                                       CurrentWeatherBigCard {
+                                          anchors.centerIn: parent
+                                          Layout.alignment: Qt.AlignHCenter
+                                          width: parent.width
+                                      }
+                                   }
+                               }
+
+                            }
+
+                            Rectangle
+                            {
+                                Layout.alignment: Qt.AlignHCenter
+                                width: 50
+                                height: 50
+                                color : "yellow"
+                            }
+
+                            Rectangle
+                            {
+                                Layout.alignment: Qt.AlignHCenter
+                                width: 50
+                                height: 50
+                                color : "yellow"
+                            }
+                        }
                     }
-                }
+
             }
 
 

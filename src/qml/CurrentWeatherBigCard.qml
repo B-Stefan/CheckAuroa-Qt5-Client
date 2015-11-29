@@ -9,14 +9,11 @@ import QtQuick.Controls 1.4 as Controls
 import CheckAurora 1.0
 import QtPositioning 5.3
 
-Card {
+Item {
    id:currentWeatherCard
-   anchors.centerIn: parent
-   height: Units.dp(220)
+      anchors.fill: parent
 
    state: "loading"
-  // var sunset = "";
-
 
    states: [
        State {
@@ -68,55 +65,57 @@ Card {
 
    }
 
-   Image {
-       id: currentRatingTxt
-       anchors.left: parent.left
-       width: 200; height: 200
-       source: "/qml/images/weather/"+weatherModel.currentWeather.icon+".svg"
-   }
-
    Text{
        anchors.left: parent.left
-       anchors.leftMargin: 200
+       anchors.leftMargin: 230
        anchors.top: parent.top
-       anchors.topMargin: 50
-       font.pointSize: 25
+       anchors.topMargin: Units.dp(100)
+       font.pixelSize: 40
        text: weatherModel.currentWeather.summary
    }
 
    Text{
        anchors.left: parent.left
-       anchors.leftMargin: 200
+       anchors.leftMargin: 230
        anchors.top: parent.top
-       anchors.topMargin: 160
-       font.pointSize: 25
+       anchors.topMargin: Units.dp(220)
+       font.pixelSize: 40
        text: ("0" + new Date(weatherModel.currentWeather.sunriseTime*1000).getHours()).toLocaleString().slice(-2) + ":" + ("0" + new Date(weatherModel.currentWeather.sunriseTime*1000).getMinutes().toLocaleString()).slice(-2);
    }
 
    Text{
        anchors.left: parent.left
-       anchors.leftMargin: 200
+       anchors.leftMargin: 230
        anchors.top: parent.top
-       anchors.topMargin: 270
-       font.pointSize: 25
+       anchors.topMargin: Units.dp(330)
+       font.pixelSize: 40
        text: ("0" + new Date(weatherModel.currentWeather.sunsetTime*1000).getHours()).toLocaleString().slice(-2) + ":" + ("0" + new Date(weatherModel.currentWeather.sunsetTime*1000).getMinutes().toLocaleString()).slice(-2);
+   }
+
+   Image {
+      // id: currentRatingTxt
+       anchors.top: parent.top
+       anchors.topMargin: Units.dp(30)
+       anchors.left: parent.left
+       width: 300; height: 300
+       source: "/qml/images/weather/"+weatherModel.currentWeather.icon+".svg"
    }
 
    Image {
      //  id: currentRatingTxt
        anchors.top: parent.top
-       anchors.topMargin: 110
+       anchors.topMargin: Units.dp(150)
        anchors.left: parent.left
-       width: 200; height: 200
+       width: 300; height: 300
        source: "/qml/images/weather/Sunrise.svg"
    }
 
    Image {
      //  id: currentRatingTxt
        anchors.top: parent.top
-       anchors.topMargin: 220
+       anchors.topMargin: Units.dp(270)
        anchors.left: parent.left
-       width: 200; height: 200
+       width: 300; height: 300
        source: "/qml/images/weather/Sunset.svg"
    }
 
