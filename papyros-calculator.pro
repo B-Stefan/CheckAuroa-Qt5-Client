@@ -24,9 +24,10 @@ SOURCES += src/main.cpp \
     src/CurrentRatingManager.cpp \
     src/RatingQmlData.cpp \
     src/WeatherQmlData.cpp \
-    src/CurrentWeatherManager.cpp
+    src/CurrentWeatherManager.cpp \
     src/RatingsManager.cpp \
-    src/RatingQmlData.cpp
+    src/KpValueQmlData.cpp \
+    src/KpValueManager.cpp
 
 OTHER_FILES = README.md
 
@@ -60,6 +61,7 @@ HEADERS += \
     src/CurrentRatingManager.h \
     src/RatingQmlData.h \
     src/WeatherQmlData.h \
-    src/CurrentWeatherManager.h
+    src/CurrentWeatherManager.h \
     src/RatingsManager.h \
-    src/RatingQmlData.h
+    src/KpValueQmlData.h \
+    src/KpValueManager.h \
