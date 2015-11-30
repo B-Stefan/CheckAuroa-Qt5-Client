@@ -53,6 +53,7 @@
 *.pro.user.*
 *.qbs.user
 *.qbs.user.*
+/build-CheckAurora-iphonesimulator_clang_Qt_5_5_0_ios_1-Debug
 *.moc
 moc_*.cpp
 qrc_*.cpp
