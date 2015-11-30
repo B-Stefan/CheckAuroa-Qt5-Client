@@ -22,11 +22,23 @@ Item {
    states: [
        State {
            name: "loading"
+           PropertyChanges { target: text1; opacity: 0 }
+           PropertyChanges { target: text2; opacity: 0 }
+           PropertyChanges { target: text3; opacity: 0 }
+           PropertyChanges { target: image1; opacity: 0 }
+           PropertyChanges { target: image2; opacity: 0 }
+           PropertyChanges { target: image3; opacity: 0 }
            PropertyChanges { target: currentRatingTxt; opacity: 0 }
            PropertyChanges { target: currentRatingWait; opacity: 1 }
        },
        State {
            name: "ready"
+           PropertyChanges { target: text1; opacity: 1 }
+           PropertyChanges { target: text2; opacity: 1 }
+           PropertyChanges { target: text3; opacity: 1 }
+           PropertyChanges { target: image1; opacity: 1 }
+           PropertyChanges { target: image2; opacity: 1 }
+           PropertyChanges { target: image3; opacity: 1 }
            PropertyChanges { target: currentRatingTxt; opacity: 1 }
            PropertyChanges { target: currentRatingWait; opacity: 0 }
        }
@@ -79,6 +91,7 @@ Item {
    }
 
    Label{
+       id: text1
        anchors.left: parent.left
        anchors.leftMargin: 230
        anchors.top: parent.top
@@ -87,6 +100,7 @@ Item {
    }
 
    Label{
+       id: text2
        anchors.left: parent.left
        anchors.leftMargin: 230
        anchors.top: parent.top
@@ -95,6 +109,7 @@ Item {
    }
 
    Label{
+       id: text3
        anchors.left: parent.left
        anchors.leftMargin: 230
        anchors.top: parent.top
@@ -104,7 +119,7 @@ Item {
    }
 
    Image {
-      // id: currentRatingTxt
+       id: image1
        anchors.top: parent.top
        anchors.topMargin: Units.dp(30)
        anchors.left: parent.left
@@ -113,7 +128,7 @@ Item {
    }
 
    Image {
-     //  id: currentRatingTxt
+       id: image2
        anchors.top: parent.top
        anchors.topMargin: Units.dp(150)
        anchors.left: parent.left
@@ -122,7 +137,7 @@ Item {
    }
 
    Image {
-     //  id: currentRatingTxt
+       id: image3
        anchors.top: parent.top
        anchors.topMargin: Units.dp(270)
        anchors.left: parent.left
