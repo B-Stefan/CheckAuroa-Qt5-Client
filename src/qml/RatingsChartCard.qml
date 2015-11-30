@@ -47,7 +47,7 @@ Item {
             ratingsChartCard.lng = 25;
         }
         if(ratingsChartCard.lat + ratingsChartCard.lng != 0){
-            model.refreshRatings(ratingsChartCard.lat, ratingsChartCard.lng)
+            model.refreshRatings(ratingsChartCard.lat,ratingsChartCard.lng)
         }
    }
    PositionSource {
@@ -81,7 +81,7 @@ Item {
            var datasets = [];
            var now = new Date();
 
-            console.log("For start")
+            console.log("For start" + model.ratings.length)
            for(var i = 0; i < model.ratings.length; i++){
             var m = model.ratings[i];
             var str = addZero(m.date.getHours()) +  ":" + addZero(m.date.getMinutes())
@@ -91,7 +91,8 @@ Item {
                 str = str + " - Tomorrow"
             }
             labels.push(str)
-            predictionValues.push(m.value);
+            console.log(m.value*100)
+            predictionValues.push(Math.round(m.value*100));
             //predictionValues.push(Math.random()*100);
 
            }

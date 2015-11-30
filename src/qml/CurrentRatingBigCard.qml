@@ -72,7 +72,7 @@ Item {
        id: currentRatingTxt
        anchors.centerIn: parent
        font.pointSize: 25
-       text: (model.currentRating.value*100)  + "%"
+       text: Math.round(model.currentRating.value*100)  + "%"
 
    }
 

@@ -63,7 +63,7 @@ public:
 
 
 public slots:
-            Q_INVOKABLE void refreshRatings();
+            Q_INVOKABLE void refreshRatings(double lat, double lng);
 
 public slots:
 

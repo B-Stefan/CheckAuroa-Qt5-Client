@@ -85,13 +85,14 @@ void RatingsManager::queryRatings(){
     connect(ratingsApi, SIGNAL(getRatingSignal(QList<SWGRating*>* )),
             this, SLOT(handleRatingsResponse(QList<SWGRating*>* )));
 
-    ratingsApi->getRating(60.0,20.9, new QString("now"));
+    qDebug() << d->lat << "-" << d->lng;
+    ratingsApi->getRating(d->lng,d->lat, new QString("now"));
 }
 
 
 void RatingsManager::handleRatingsResponse(QList<SWGRating*>* ratings) {
 
-    qCDebug(RatingsManagerLog) << "got weather network data";
+    qCDebug(RatingsManagerLog) << "get ratings done";
 
     d->now.setValue(0.8);
     d->ready = true;
@@ -114,7 +115,9 @@ void RatingsManager::handleRatingsResponse(QList<SWGRating*>* ratings) {
     emit readyChanged();
 
 }
-void RatingsManager::refreshRatings() {
+void RatingsManager::refreshRatings(double lat, double lng) {
+    this->setLat(lat);
+    this->setLng(lng);
     this->queryRatings();
 }
 

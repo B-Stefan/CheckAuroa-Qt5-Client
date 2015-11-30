@@ -55,7 +55,7 @@ void CurrentRatingManager::queryCurrentRating(double lat, double lng) {
     connect(ratingsApi, SIGNAL(getCurrentRatingSignal(SWGRating* )),
             this, SLOT(handleCurrentRatingResponse(SWGRating* )));
 
-    ratingsApi->getCurrentRating(lat, lng, new QString("now"));
+    ratingsApi->getCurrentRating(lng,lat, new QString("now"));
     qDebug() << "rating done for: " + QString::number(lat) + ", " + QString::number(lng);
 }
 
