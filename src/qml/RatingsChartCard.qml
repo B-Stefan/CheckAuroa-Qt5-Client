@@ -39,7 +39,10 @@ Item {
        }
    ]
 
-
+   onLngChanged: {
+     console.log("CHNAAAGE" + currentRatingCard.lat, currentRatingCard.lng)
+     model.refreshRatings(ratingsChartCard.lat,ratingsChartCard.lng)
+   }
    Component.onCompleted: {
         var forbiddenPlatforms = ["osx" , "windows", "wince", "winrt"];
         if( forbiddenPlatforms.indexOf(Qt.platform.os) != -1 ){

@@ -16,6 +16,8 @@ Page {
 
     title:overviewPage.cityName
     Overview {
+        lat: overviewPage.lat
+        lng: overviewPage.lng
         anchors.fill: parent
     }
 }

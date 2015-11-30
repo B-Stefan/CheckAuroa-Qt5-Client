@@ -29,6 +29,12 @@ Item {
        }
    ]
 
+  onLatChanged: {
+  }
+  onLngChanged: {
+    console.log("CHNAAAGE" + currentRatingCard.lat, currentRatingCard.lng)
+    model.refreshRating(currentRatingCard.lat, currentRatingCard.lng)
+  }
   Component.onCompleted: {
           var forbiddenPlatforms = ["osx" , "windows", "wince", "winrt"];
           if( forbiddenPlatforms.indexOf(Qt.platform.os) != -1 ){
@@ -36,6 +42,7 @@ Item {
               currentRatingCard.lng = 25;
           }
           if(currentRatingCard.lat + currentRatingCard.lng != 0){
+              currentRatingCard.state = "loading"
               model.refreshRating(currentRatingCard.lat, currentRatingCard.lng)
           }
      }
@@ -68,11 +75,11 @@ Item {
    }
 
    Text {
-       font.pixelSize: 100
+       font.pixelSize: 10
        id: currentRatingTxt
        anchors.centerIn: parent
-       font.pointSize: 25
-       text: Math.round(model.currentRating.value*100)  + "%"
+       font.pointSize: 10
+       text: Math.round(model.currentRating.value*100)  + "%" +  currentRatingCard.lat
 
    }
 

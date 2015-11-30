@@ -127,8 +127,9 @@ Item {
 
                                   onClicked: {
                                     console.log("yeeeah+ " + geometry.location.lat )
-                                    pageStack.push({item: myCard,properties: {cityName:city, lat: geometry.location.lat, lng: geometry.location.lng}})
-                                    enablingSwitch.checked = !enablingSwitch.checked
+                                    myCard.lat =  geometry.location.lat;
+                                    myCard.lng =  geometry.location.lng;
+                                    pageStack.push({item: Qt.resolvedUrl("OverviewPage.qml"),properties: {cityName:city, lat: geometry.location.lat, lng: geometry.location.lng}})
                                   }
 
                                   action: Icon {
