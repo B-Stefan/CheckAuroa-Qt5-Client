@@ -173,11 +173,13 @@ ApplicationWindow {
             anchors.fill: parent
             Controls.ScrollView{
                 anchors.fill: parent
+                anchors.topMargin: Units.dp(10);
 
                 Rectangle {
                     ColumnLayout {     // <--- unique child
                         spacing: 30
-
+                        width: calculator.width      // ensure correct width
+                        height: children.height     // ensure correct height
                         Card {
                             Layout.alignment: Qt.AlignHCenter
                             Layout.preferredWidth: Units.dp(400)
@@ -206,22 +208,6 @@ ApplicationWindow {
                                }
                            }
 
-                        }
-
-                        Rectangle
-                        {
-                            Layout.alignment: Qt.AlignHCenter
-                            width: 50
-                            height: 50
-                            color : "yellow"
-                        }
-
-                        Rectangle
-                        {
-                            Layout.alignment: Qt.AlignHCenter
-                            width: 50
-                            height: 50
-                            color : "yellow"
                         }
                     }
                 }
