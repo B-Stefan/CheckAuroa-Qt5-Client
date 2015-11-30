@@ -13,7 +13,11 @@ Item {
    id:currentWeatherCard
       anchors.fill: parent
 
+   property double lat: 0
+   property double lng: 0
+
    state: "loading"
+
 
    states: [
        State {
@@ -27,6 +31,7 @@ Item {
            PropertyChanges { target: currentRatingWait; opacity: 0 }
        }
    ]
+
 
    PositionSource {
           id: positionSource
@@ -56,7 +61,15 @@ Item {
        }
    }
    Component.onCompleted: {
-        weatherModel.refreshWeather(positionSource.position.coordinate.latitude, positionSource.position.coordinate.longitude)
+          var forbiddenPlatforms = ["osx" , "windows", "wince", "winrt"];
+          if( forbiddenPlatforms.indexOf(Qt.platform.os) != -1 ){
+              currentWeatherCard.lat = 60;
+              currentWeatherCard.lng = 25;
+          }
+          if(currentWeatherCard.lat + currentWeatherCard.lng != 0){
+              currentWeatherCard.state = "loading"
+               weatherModel.refreshWeather(currentWeatherCard.lat, currentWeatherCard.lng)
+          }
    }
 
    ProgressCircle {
@@ -65,30 +78,28 @@ Item {
 
    }
 
-   Text{
+   Label{
        anchors.left: parent.left
        anchors.leftMargin: 230
        anchors.top: parent.top
        anchors.topMargin: Units.dp(100)
-       font.pixelSize: 40
        text: weatherModel.currentWeather.summary
    }
 
-   Text{
+   Label{
        anchors.left: parent.left
        anchors.leftMargin: 230
        anchors.top: parent.top
        anchors.topMargin: Units.dp(220)
-       font.pixelSize: 40
        text: ("0" + new Date(weatherModel.currentWeather.sunriseTime*1000).getHours()).toLocaleString().slice(-2) + ":" + ("0" + new Date(weatherModel.currentWeather.sunriseTime*1000).getMinutes().toLocaleString()).slice(-2);
    }
 
-   Text{
+   Label{
        anchors.left: parent.left
        anchors.leftMargin: 230
        anchors.top: parent.top
        anchors.topMargin: Units.dp(330)
-       font.pixelSize: 40
+
        text: ("0" + new Date(weatherModel.currentWeather.sunsetTime*1000).getHours()).toLocaleString().slice(-2) + ":" + ("0" + new Date(weatherModel.currentWeather.sunsetTime*1000).getMinutes().toLocaleString()).slice(-2);
    }
 
@@ -97,7 +108,7 @@ Item {
        anchors.top: parent.top
        anchors.topMargin: Units.dp(30)
        anchors.left: parent.left
-       width: 300; height: 300
+       width: 150; height: 150
        source: "/qml/images/weather/"+weatherModel.currentWeather.icon+".svg"
    }
 
@@ -106,7 +117,7 @@ Item {
        anchors.top: parent.top
        anchors.topMargin: Units.dp(150)
        anchors.left: parent.left
-       width: 300; height: 300
+       width: 150; height: 150
        source: "/qml/images/weather/Sunrise.svg"
    }
 
@@ -115,7 +126,7 @@ Item {
        anchors.top: parent.top
        anchors.topMargin: Units.dp(270)
        anchors.left: parent.left
-       width: 300; height: 300
+       width: 150; height: 150
        source: "/qml/images/weather/Sunset.svg"
    }
 

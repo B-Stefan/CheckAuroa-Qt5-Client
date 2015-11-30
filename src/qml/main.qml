@@ -197,7 +197,7 @@ ApplicationWindow {
                                }
 
                                Rectangle {
-                                   Layout.alignment: Qt.AlignCenter
+                                   Layout.alignment: Qt.Left
                                    Layout.preferredWidth: parent.width
                                    Layout.preferredHeight: parent.height
                                    CurrentWeatherBigCard {
