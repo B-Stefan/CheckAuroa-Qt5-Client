@@ -75,11 +75,11 @@ Item {
    }
 
    Text {
-       font.pixelSize: 10
+       font.pixelSize: 100
        id: currentRatingTxt
        anchors.centerIn: parent
-       font.pointSize: 10
-       text: Math.round(model.currentRating.value*100)  + "%" +  currentRatingCard.lat
+       font.pointSize: 25
+       text: Math.round(model.currentRating.value*100)  + "%"
 
    }
 
